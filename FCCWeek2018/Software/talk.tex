@@ -1,0 +1,150 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[hyperref={colorlinks=true,pdfpagelabels=false,linkcolor=black}, xcolor=dvipsnames,10pt]{beamer}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=black, menucolor=blue, pagecolor=blue, urlcolor=cyan}
+
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{xcolor, color}% ,colortbl}
+\usepackage{tikz} % nalipour
+\usetikzlibrary{tikzmark} % nalipour
+\usepackage{hyperref}
+\usetikzlibrary{shapes,arrows, decorations.pathreplacing} %nilou
+\usetikzlibrary{decorations.markings} %nilou
+\usetikzlibrary{trees}%nilou
+\usetikzlibrary{decorations.pathmorphing}%nilou 
+\usepackage{siunitx}%nilou
+\usepackage{framed}%nilou
+\usetikzlibrary{backgrounds} %nilou
+\usepackage[framemethod=tikz]{mdframed}%nilou
+\usepackage{adjustbox} %nilou for adjusting the table
+\usepackage{amssymb} %nalipour for checkmark
+\usepackage{libertine} % For the font
+
+%\usepackage{../../../CLICdp_definitions} % nalipour
+\usepackage{xspace}
+\usepackage{upgreek} % nalipour
+\usepackage{amsmath, mathtools} % nalipour
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} % nalipour: symbols
+                                % for the footnote
+\usepackage{verbatim} % nalipour
+\usepackage{fixltx2e}
+\usepackage{adjustbox}%nalipour
+\usepackage{pifont} %nalipour
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\usepackage{siunitx}
+
+\usetikzlibrary{angles,quotes}
+\usetikzlibrary{positioning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\title[]{Implementation of the IDEA drift chamber within FCCSW}
+\author[Niloufar Alipour Tehrani]{Niloufar Alipour Tehrani
+  \vspace{0.3cm} }
+
+\institute[CERN]{} 
+\date[14 March 2018]{FCC-ee MDI study group meeting\\ \vspace{0.3cm}
+  \scriptsize{CERN \\
+14 March 2018}}
+
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usetheme{default}%CambridgeUS}%Boadilla}%Pittsburgh}
+\usecolortheme{default}
+
+\setlength{\leftmargini}{2pt} % nalipour: left margin indentation
+\renewcommand{\inserttotalframenumber}{\ref{lastframe}} 
+\begin{document}
+\renewcommand{\inserttotalframenumber}{\pageref{lastslide}}
+
+\tikzset{cross/.style={cross out, draw=black, minimum
+    size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt}, %default
+  radius will be 1pt.  cross/.default={1pt}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+  
+  \titlepage
+  \begin{columns}
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{../logos/FCC-logo}
+    \column{0.5\textwidth}
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[width=0.6\textwidth]{../logos/logo_cern.pdf}
+  \end{columns}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Introduction}
+	
+	\begin{enumerate}
+	\item FCC experiment and FCCSW
+	\item IDEA detector concept
+	\item Drift chamber
+	\item Geometry implementation
+	\item Segmentation and validation
+	\item Simulation
+	\item Where to find and how to simulate the drift chamber
+	\item Material budget scan
+	\item Background studies
+	\end{enumerate}
+	
+
+%		\centering
+%    		\includegraphics[width=\textwidth]{figures/cellid2359297}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{lastslide}
+\begin{frame}
+  \frametitle{Conclusions}
+
+\end{frame}
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	End of Document
+%----------------------------------------------------------------------------------------
+\end{document} 
