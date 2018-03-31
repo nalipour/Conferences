@@ -1,0 +1,607 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Beamer Presentation
+% LaTeX Template
+% Version 1.0 (10/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+
+\documentclass[hyperref={colorlinks=true,pdfpagelabels=false,linkcolor=black}, xcolor=dvipsnames,10pt]{beamer}
+\hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=black, menucolor=blue, pagecolor=blue, urlcolor=cyan}
+
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{xcolor, color}% ,colortbl}
+\usepackage{tikz} % nalipour
+\usetikzlibrary{tikzmark} % nalipour
+\usepackage{hyperref}
+\usetikzlibrary{shapes,arrows, decorations.pathreplacing} %nilou
+\usetikzlibrary{decorations.markings} %nilou
+\usetikzlibrary{trees}%nilou
+\usetikzlibrary{decorations.pathmorphing}%nilou 
+\usepackage{siunitx}%nilou
+\usepackage{framed}%nilou
+\usetikzlibrary{backgrounds} %nilou
+\usepackage[framemethod=tikz]{mdframed}%nilou
+\usepackage{adjustbox} %nilou for adjusting the table
+\usepackage{amssymb} %nalipour for checkmark
+\usepackage{libertine} % For the font
+
+%\usepackage{../../../CLICdp_definitions} % nalipour
+\usepackage{xspace}
+\usepackage{upgreek} % nalipour
+\usepackage{amsmath, mathtools} % nalipour
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} % nalipour: symbols
+                                % for the footnote
+\usepackage{verbatim} % nalipour
+\usepackage{fixltx2e}
+\usepackage{adjustbox}%nalipour
+\usepackage{pifont} %nalipour
+\usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions}
+\usepackage{siunitx}
+
+\usetikzlibrary{angles,quotes}
+\usetikzlibrary{positioning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+\title[]{Beam-background impact in the IDEA drift chamber}
+\author[Niloufar Alipour Tehrani]{Niloufar Alipour Tehrani
+  \vspace{0.3cm} }
+
+\institute[CERN]{} 
+\date[27 March 2018]{WG11 Detector Design Meeting\\ \vspace{0.3cm}
+  \scriptsize{CERN \\
+27 March 2018}}
+
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usetheme{default}%CambridgeUS}%Boadilla}%Pittsburgh}
+\usecolortheme{default}
+
+\setlength{\leftmargini}{2pt} % nalipour: left margin indentation
+\renewcommand{\inserttotalframenumber}{\ref{lastframe}} 
+\begin{document}
+\renewcommand{\inserttotalframenumber}{\pageref{lastslide}}
+
+\tikzset{cross/.style={cross out, draw=black, minimum
+    size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt}, %default
+  radius will be 1pt.  cross/.default={1pt}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[plain]
+  
+  \titlepage
+  \begin{columns}
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{../logos/FCC-logo}
+    \column{0.5\textwidth}
+    \column{0.25\textwidth}
+    \centering
+    \includegraphics[width=0.6\textwidth]{../logos/logo_cern.pdf}
+  \end{columns}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Introduction}
+	
+	\begin{enumerate}
+	\item FCC experiment and FCCSW
+	\item IDEA detector concept
+	\item Drift chamber
+	\item Geometry implementation
+	\item Segmentation and validation
+	\item Simulation
+	\item Material budget scan
+	\item Background studies
+	\end{enumerate}
+	
+
+%		\centering
+%    		\includegraphics[width=\textwidth]{figures/cellid2359297}
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{FCC Software}
+	
+	\begin{columns}
+	\column{0.5\textwidth}
+	\begin{itemize}
+	\item Common software for all FCC experiments
+		\begin{itemize}
+		\item ee, hh \& eh
+		\end{itemize}
+	\item Detector and physics studies
+		\begin{itemize}
+		\item Fast \& full simulations
+		\item One software stack from event generation to physics analysis
+		\end{itemize}
+	\item Collaborative approach
+		\begin{itemize}
+		\item LHC: Gaudi
+		\item CLIC: DD4hep
+		\end{itemize}
+	\end{itemize}
+	
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/cernFCC}
+	\end{columns}
+	
+	\vspace{0.5cm}
+
+	\begin{block}{FCCSW simulation pipeline}
+	\smartdiagramset{back arrow disabled=true}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
+	\end{block}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{FCCee: IDEA detector concept}
+	
+	\begin{columns}
+	\column{0.5\textwidth}
+	
+	\begin{block}{Ultimate Goal}
+	\begin{itemize}
+	\item Vertex detector: MAPS
+	\item Ultra-light drift chamber with PID
+	\item Pre-shower counter
+	\item Double read-out calorimetry
+	\item 2~T solenoidal magnetic field
+	\item Instrumented return yoke
+	\item Surrounded by large tracking volume (R$\sim$8~m) for very weakly coupled (long-lived) particles
+	\end{itemize}
+	\end{block}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/FCCeeIDEAConcept.png}
+	\end{columns}
+
+	\begin{block}{Implementation in FCCSW}
+	\begin{itemize}
+	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
+	\item Vertex detector also taken from the CLD concept.
+	\item The drift chamber implemented from scratch in FCCSW.
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Vertex Detector}
+	
+	\begin{columns}
+	\column{0.5\textwidth}
+	
+	\begin{block}{Geometry}
+	\begin{itemize}
+	\item Barrel: 3 double-sided layers
+	\item Endcap: 3 double-sided disks
+	\end{itemize}
+	\end{block}
+
+	
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/Vertex.png}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Drift Chamber}
+	
+	
+	\begin{columns}	
+	\column{0.5\textwidth}	
+		\begin{block}{Parameters}
+  \begin{table}
+    \begin{adjustbox}{max width=\textwidth}
+      \begin{tabular}{l l}
+        \toprule
+        % & Dimensions    \\
+        % \hline
+        Length & 4500 mm \\ 
+        Inner radius & 345 mm \\
+        Outer radius & 2000 mm\\
+        Nb. layers & 112 \\
+        Cell size & 12 mm to 14.7~mm\\
+        Total nb. of sensitive wires & 56448 \\
+        Total nb. of field wires & 282240 \\
+        Total nb. of wires & 338688 \\
+        Gas & GasHe\_90Isob\_10 \\
+        Wire material & Aluminum \\
+        Single cell resolution & 0.1 mm \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  \end{table}
+		\end{block}
+
+
+	\column{0.5\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
+	\end{columns}
+	
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Geometry implementation in DD4hep}
+	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description.png}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Segmentation}
+		
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+		\begin{itemize}
+		\item Information on the location of the wires \vspace{0.2cm}
+		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}ß
+		\item Different granularity for different layers in the DCH \vspace{0.2cm}
+		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
+			$\Rightarrow$ Accessible in every step of the simulation
+		\end{itemize}
+	
+		\column{0.5\textwidth}	
+		\begin{itemize}
+		\item First layer of the DCH
+		\item Hits having the same wire ID are shown by the same color
+		\item Validates the segmentation
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/allHits}
+	\end{columns}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Simulation of the DCH}
+	
+	\begin{itemize}
+	\item Stepping in the gas with a step length of 2~mm \vspace{0.2cm}
+	\item Reject ionisation acts with: \vspace{0.2cm}
+		\begin{itemize}
+		\item E\textsubscript{dep}$<$~10~eV
+		\item \texttt{G4Step} length~$<~5\mu$m
+		\end{itemize} \vspace{0.2cm}
+	
+	\item Drift the E\textsubscript{dep} to the nearest wire \vspace{0.2cm}
+		\begin{itemize}
+		\item Distance of the closest approach
+		\item Assume a constant drift velocity of 2~cm/$\mu$s
+		\item Calculate drift time
+		\end{itemize} \vspace{0.2cm}
+		
+	\item For each wire, merge the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
+	\end{itemize}
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Number of layers vs. $\theta$}
+	
+	\begin{itemize}
+		\item Number of layers hit by 100~GeV $\mu-$ 
+		\begin{itemize}
+
+		\item $\theta=0^{\circ}$: very forward direction
+		\item $\theta=90^{\circ}$: in the barrel
+		\item Averaged over $\phi$	
+		\end{itemize}
+	\end{itemize}
+		
+	\begin{columns}	
+		\column{0.5\textwidth}	
+		\begin{block}{VXD}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/theta_nbHits_VXD.pdf}
+		\end{block}
+	
+		\column{0.5\textwidth}	
+		\begin{block}{DCH}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/theta_nbHits_DCH.pdf} 	
+		\end{block}
+	\end{columns}
+	
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Material Budget Scan: work in progress}
+	
+	\begin{columns}
+  	\column{0.5\textwidth}	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/material/depthpos.pdf}
+	
+	\column{0.5\textwidth}	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/material/x0pos.pdf}
+  \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Background studies}
+
+	\begin{itemize}
+	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
+	\item E\textsubscript{cm} = 365~GeV
+	\item Total nb. of particles: $\sim6200$
+	\end{itemize}		
+	
+	\begin{block}{Momentum distribution}
+	\begin{columns}
+	\column{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_px.pdf} \\									\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_py.pdf}
+	\column{0.5\textwidth}
+		\centering
+		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_pz.pdf}  \\
+		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_pT.pdf} 
+
+		\end{columns}	
+	\end{block}
+	
+%	\begin{table}
+%    \begin{adjustbox}{max width=\textwidth}
+%      \begin{tabular}{l c}
+%        \toprule
+%        Events & Average number per BX \\
+%        \hline
+%        Total particles & 6160 \\
+%        Hits in the VXD barrel & 2737 \\
+%        Hits in the VXD endcap & 2537 \\
+%        Hits in the DCH & 3345.7 \\
+%        \bottomrule
+%      \end{tabular}
+%    \end{adjustbox}
+%  \end{table}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Background studies for the VXD: work in progress}
+
+	
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+		\item Vertex Barrel
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_barrel.pdf}
+		
+	\column{0.5\textwidth}
+		\begin{itemize}
+		\item Vertex Endcap
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
+	\end{columns}
+	
+	\begin{table}
+    \begin{adjustbox}{max width=\textwidth}
+      \begin{tabular}{l c}
+        \toprule
+        Detector & Total nb. of hits \\
+        \hline
+        Hits in the VXD barrel & 2737 \\
+        Hits in the VXD endcap & 2537 \\
+        \bottomrule
+      \end{tabular}
+    \end{adjustbox}
+  \end{table}
+	
+	
+	\begin{itemize}
+	\item The trend is as expected
+	\item More investigation \& tuning on the hit reconstruction and cuts in Geant4 simulations is needed
+	\end{itemize}	
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Background studies for the DCH: work in progress}
+
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+		\begin{itemize}
+		\item Number of wires with different IDs recorded a signal
+			\begin{itemize}
+			\item Average: 3345.7 wires
+			\end{itemize}
+		\end{itemize}
+	
+		\centering
+		\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
+	
+
+		
+		\column{0.5\textwidth}
+		\begin{itemize}
+		\item Number of hits recorded per wire in the first BX
+		\item Mostly 1-hit per wire
+		\item Several hits per wire: pile-up or same 
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/DCH/nb_hits_per_wire.pdf}
+		
+	\end{columns}
+	
+	\begin{itemize}
+	\item To be investigated further: merging hits belonging to the same wire and having a drift time smaller than the maximum drift time in a cell.
+	\item Occupancy as a function of the cell/voxel
+	\end{itemize}		
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Background studies for the DCH: number of hits per layer}
+
+	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/DCH/DCH_hits_layer.pdf}
+		
+	
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{lastslide}
+\begin{frame}
+  \frametitle{Summary \& Outlook}
+  
+	\begin{itemize}
+	 \item FCCee-detector concept simulation with FCCSW \vspace{0.2cm}
+	 	\begin{itemize}
+	  	\item Implementation of the geometry \vspace{0.2cm}
+	  	\item Simulation \vspace{0.2cm}
+	  	\item Validation \vspace{0.5cm}
+	  	\end{itemize}
+	\item Study of beam-induced backgrounds: e+e- incoherent pairs \vspace{0.2cm}
+		\begin{itemize}
+	  	\item Estimation of the occupancy in the VXD and DCH
+	  	\end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%  \frametitle{Number of times the same wire is hit per BX}
+%
+%  \begin{columns}
+%  	\column{0.33\textwidth}	
+%  	\begin{itemize}
+%  	\item BX 0
+%  	\end{itemize}
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX0.pdf}
+%	
+%	\column{0.33\textwidth}
+%	\begin{itemize}
+%  	\item BX 1
+%  	\end{itemize}
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX1.pdf}
+%	
+%	\column{0.33\textwidth}	
+%  	\begin{itemize}
+%  	\item BX 2
+%  	\end{itemize}
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX2.pdf}
+%  \end{columns}
+%
+%\end{frame}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%  \frametitle{Material Budget: Full Detector}
+%
+%  \begin{columns}
+%  	\column{0.33\textwidth}	
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/material/depth.pdf}\\
+%	\includegraphics[width=\textwidth]{../figures/material/depthpos.pdf}
+%	
+%	\column{0.33\textwidth}	
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/material/lambda.pdf}\\
+%	\includegraphics[width=\textwidth]{../figures/material/lambdapos.pdf}
+%	
+%	\column{0.33\textwidth}	
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/material/x0.pdf}\\
+%	\includegraphics[width=\textwidth]{../figures/material/x0pos.pdf}
+%  \end{columns}
+%
+%\end{frame}
+%----------------------------------------------------------------------------------------
+%	End of Document
+%----------------------------------------------------------------------------------------
+\end{document} 
