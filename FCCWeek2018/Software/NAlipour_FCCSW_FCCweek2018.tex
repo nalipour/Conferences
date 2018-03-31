@@ -104,35 +104,12 @@
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Introduction}
-	
-	\begin{enumerate}
-	\item FCC experiment and FCCSW
-	\item IDEA detector concept
-	\item Drift chamber
-	\item Geometry implementation
-	\item Segmentation and validation
-	\item Simulation
-	\item Material budget scan
-	\item Background studies
-	\end{enumerate}
-	
-
-%		\centering
-%    		\includegraphics[width=\textwidth]{figures/cellid2359297}
-
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{FCC Software}
+	\frametitle{FCC Software: FCCSW}
 	
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -150,6 +127,7 @@
 		\begin{itemize}
 		\item LHC: Gaudi
 		\item CLIC: DD4hep
+		\item New solutions $\Rightarrow$ where needed
 		\end{itemize}
 	\end{itemize}
 	
@@ -158,15 +136,6 @@
 	\includegraphics[width=\textwidth]{../figures/cernFCC}
 	\end{columns}
 	
-	\vspace{0.5cm}
-
-	\begin{block}{FCCSW simulation pipeline}
-	\smartdiagramset{back arrow disabled=true}
-  	\smartdiagram[flow diagram:horizontal]
-  	{%
-    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
-  	}
-	\end{block}
 
 \end{frame}
 
@@ -174,12 +143,26 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{FCCee: IDEA detector concept}
+	\frametitle{2 FCCee detector concepts}
+	
+		\begin{itemize}
+		\item The CLD detector concept (c.f. CLD detector model overview, Oleksandr~Viazlo)
+			\begin{itemize}
+			\item An adaptation of the CLIC detector model 
+			\\ $\Rightarrow$ (Silicon-based vertex and tracking detectors)
+			\item Widely simulated with the ILCSoft
+			\end{itemize}
+		\item The IDEA detector concept $\Rightarrow$ \textcolor{Red}{focus of this talk}
+			\begin{itemize}
+			\item Simulated using FCCSW
+			\end{itemize}
+		\end{itemize}
+
 	
 	\begin{columns}
 	\column{0.5\textwidth}
 	
-	\begin{block}{Ultimate Goal}
+	\begin{block}{IDEA: Ultimate Goal}
 	\begin{itemize}
 	\item Vertex detector: MAPS
 	\item Ultra-light drift chamber with PID
@@ -195,44 +178,25 @@
 	\includegraphics[width=\textwidth]{../figures/FCCeeIDEAConcept.png}
 	\end{columns}
 
-	\begin{block}{Implementation in FCCSW}
-	\begin{itemize}
-	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
-	\item Vertex detector also taken from the CLD concept.
-	\item The drift chamber implemented from scratch in FCCSW.
-	\end{itemize}
-	\end{block}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Vertex Detector}
+	\frametitle{IDEA Drift Chamber (DCH)}
 	
-	\begin{columns}
-	\column{0.5\textwidth}
-	
-	\begin{block}{Geometry}
+
 	\begin{itemize}
-	\item Barrel: 3 double-sided layers
-	\item Endcap: 3 double-sided disks
-	\end{itemize}
-	\end{block}
-
-	
-	\column{0.5\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/Vertex.png}
-	\end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Drift Chamber}
-	
+	\item Track reconstruction
+	\item Particle ID
+	\item Layers divided into cells rotated with a certain stereo angle
+		\begin{itemize}
+		\item Field wires: provide a uniform electric field
+		\item Sensitive wires: record signal
+		\item Field to sense wire ratio: 5:1
+		\end{itemize}
+	\end{itemize}		
 	
 	\begin{columns}	
 	\column{0.5\textwidth}	
@@ -273,10 +237,38 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Geometry implementation in DD4hep}
+	\frametitle{FCCSW simulation chain}
 	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description.png}
+	\begin{enumerate}
+	\item Detector geometry description with DD4hep
+		\begin{itemize}
+		\item Collaborative effort with CLIC, ILC and LHCb
+		\item The IR region and the VXD from CLD are as well implemented in DD4hep
+		\item Definition of the gas layers in the DCH 
+		\end{itemize}
+	\item Segmentation of the sensitive areas:
+		\begin{itemize}
+		\item Information on the position of the sense wires instead of placing physical volumes
+		\item Speed up the simulation
+		\end{itemize}
+	\item Geant4 simulation:
+		\begin{itemize}
+		\item Calculate the E\textsubscript{dep} for each ionisation action
+		\item Charge drift to the wires
+		\end{itemize}
+	\item Hit reconstruction:
+		\begin{itemize}
+		\item Combination of individual hit calculations from (4)
+		\item Calculation of the signal in the wire
+		\end{itemize}
+	\end{enumerate}		
+	
+	\smartdiagramset{back arrow disabled=true}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
+  	
 
 \end{frame}
 
@@ -284,7 +276,30 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Segmentation}
+	\frametitle{1. Geometry}
+	
+	\begin{itemize}
+	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
+	\item Vertex detector also taken from the CLD concept.
+	\item The drift chamber implemented from scratch in FCCSW.
+	\end{itemize}
+	
+	\begin{block}{Visualisation with FCCSW}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description_zoomVXD.png}
+	\end{block}
+
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{2. Segmentation}
 		
 	\begin{columns}[t]
 		\column{0.5\textwidth}
