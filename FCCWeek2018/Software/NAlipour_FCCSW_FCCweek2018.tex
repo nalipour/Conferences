@@ -304,7 +304,7 @@
 	\begin{columns}[t]
 		\column{0.5\textwidth}
 		\begin{itemize}
-		\item Information on the location of the wires \vspace{0.2cm}
+		\item Information on the location of the sensitive wires \vspace{0.2cm}
 		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}ß
 		\item Different granularity for different layers in the DCH \vspace{0.2cm}
 		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
@@ -327,25 +327,37 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{3. Geant4 simulation of the DCH}
+	\frametitle{3. Hit simulation and reconstruction of the DCH }
 	
+	\begin{block}{Hit Simulation}
 	\begin{itemize}
-	\item Stepping in the gas with a step length of 2~mm \vspace{0.2cm}
-	\item Reject ionisation acts with: \vspace{0.2cm}
+	\item Geant4: Stepping in the gas with a G4Step length of 2~mm 
+	\item Reject ionisation acts with:
 		\begin{itemize}
 		\item E\textsubscript{dep}$<$~10~eV
 		\item \texttt{G4Step} length~$<~5\mu$m
-		\end{itemize} \vspace{0.2cm}
+		\end{itemize} 
 	
-	\item Drift the E\textsubscript{dep} to the nearest wire \vspace{0.2cm}
+	\item Drift the charge deposition to the nearest wire 
 		\begin{itemize}
-		\item Distance of the closest approach
-		\item Assume a constant drift velocity of 2~cm/$\mu$s
-		\item Calculate drift time
-		\end{itemize} \vspace{0.2cm}
-		
-	\item For each wire, merge the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
+		\item Compute the distance of the closest approach
+		\item Calculate the drift time assuming a constant drift velocity of 2~cm/$\mu$s
+		\item Smear with the timing resolution of ????
+		\item Calculate the total time of the hit \\
+		\begin{equation}
+	      t_{hit} = t_{drift}+t_{\text{signal}}+t_{\text{particle flight}}
+    		\end{equation}
+		\end{itemize} 
 	\end{itemize}
+	\end{block}
+		
+	\begin{block}{Reconstruction}
+		\begin{itemize}
+		\item \textcolor{Red}{Hit}: regroup the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
+		\end{itemize}
+	\end{block}
+
+	
 	
 \end{frame}
 
