@@ -233,6 +233,8 @@
 	
 \end{frame}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -258,7 +260,7 @@
 		\end{itemize}
 	\item Hit reconstruction:
 		\begin{itemize}
-		\item Combination of individual hit calculations from (4)
+		\item Combination of individual hit calculations from (3)
 		\item Calculation of the signal in the wire
 		\end{itemize}
 	\end{enumerate}		
@@ -293,13 +295,108 @@
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}
+  \frametitle{2. Segmentation Strategy for DCH (1)}
+
+
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item Compute the azimuth angle of the hit $\phi$ for $(x_{hit},
+      y_{hit})$ 
+      \begin{itemize}
+      \item (like if the wires were parallel to the z-axis).
+      \end{itemize}
+
+    \begin{equation}
+      \phi = \arctan(y_{hit}/x_{hit})
+    \end{equation}
+
+    \item The angle between the hit position and the wire detecting it
+      is calculated:
+
+    \begin{equation}
+      \alpha = 2 \arcsin({{z_{hit} tan(\epsilon)} \over {2R}})
+    \end{equation}
+  \item Total hit azimuthal angle: $\phi+\alpha$
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{tikzpicture}[scale=0.8]
+
+      \pgfmathsetmacro{\R}{2}
+      \pgfmathsetmacro{\wireAng}{45}
+      
+      \coordinate (O) at (0,0);
+      \foreach \angle in 
+      {0,45,...,360} 
+      { 
+        \fill (\angle:\R) circle (0.1cm); 
+      } 
+      \draw (0,0) circle (\R);
+
+      \draw 
+      (\R,0) coordinate (xcoord) -- 
+      node[midway,below] {R} (O) -- 
+      (\wireAng:\R) coordinate (slcoord)
+      pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
+
+      \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
+      (deltay) [midway,right] {a};
+
+      \begin{scope}[]
+        \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+      \end{scope}
+    \end{tikzpicture}
+\\
+
+    \begin{tikzpicture}[scale=0.7]
+      \begin{scope}
+        \coordinate (origin) at (0,4);
+
+        \draw[->] (-0.5,0.5) -- (5,0.5) node[right] {$z$};
+        \draw[->] (-0.5, 0.5) -- (-0.5,5) node[above] {$\phi$};
+
+        \draw[-,line width=1pt] (0, 1) -- (0, 4);
+        \draw[-,line width=1pt] (4, 1.5) -- (4, 4.5);
+
+        \draw[-,line width=2pt] (0, 1) -- (4, 1.5);
+        \draw[-,line width=2pt] (0, 2) -- (4, 2.5);
+        \draw[-,line width=2pt] (0, 3) -- (4, 3.5);
+        \draw[-,line width=2pt] (0, 4) -- (4, 4.5) node
+        (pivot) [] {};
+        \draw[<->,line width=0.5pt] (0, 4.1) -- (4, 4.6) node
+        (length) [above] {wire length};
+        \draw[<->,line width=0.5pt,red] (4.2, 1.5) -- (4.2, 2.5) node
+        (deltay) [midway, right] {a};
+
+        \draw[-,dashed, line width=0.5pt] (origin) -- (3, 4) node
+        (horizon) [] {};
+        \pic [draw, ->, "$\epsilon$", angle eccentricity=1.2, angle radius=2cm] {angle = horizon--origin--pivot};
+
+
+        \draw[-,dashed, blue] (0, 1.5) -- (4, 2);
+        \draw[-, dashed, blue] (0, 2.5) -- (4, 3);
+        \draw[-, dashed, blue] (0, 3.5) -- (4, 4);
+
+        % \draw[-,blue,line width=1pt] (2, 5) -- (2, 0.7) node
+        % (segz) [right] {z segmentation (w)};
+      \end{scope}
+    \end{tikzpicture}
+  \end{columns}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{2. Segmentation for DCH}
+	\frametitle{2. Segmentation: validation in simulation (2)}
 		
 	\begin{columns}[t]
 		\column{0.5\textwidth}
@@ -366,13 +463,13 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Number of layers vs. $\theta$}
+	\frametitle{Number of sensitive layers vs. $\theta$}
 	
 	\begin{itemize}
 		\item Number of layers hit by 100~GeV $\mu-$ 
 		\begin{itemize}
 
-		\item $\theta=0^{\circ}$: very forward direction
+		\item $\theta=0^{\circ}$: in the forward direction
 		\item $\theta=90^{\circ}$: in the barrel
 		\item Averaged over $\phi$	
 		\end{itemize}
@@ -392,26 +489,10 @@
 		\end{block}
 	\end{columns}
 	
+	
 \end{frame}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Material Budget Scan: work in progress}
-	
-	\begin{columns}
-  	\column{0.5\textwidth}	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/material/depthpos.pdf}
-	
-	\column{0.5\textwidth}	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/material/x0pos.pdf}
-  \end{columns}
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
@@ -421,6 +502,7 @@
 
 	\begin{itemize}
 	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
+	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
 	\item E\textsubscript{cm} = 365~GeV
 	\item Total nb. of particles: $\sim6200$
 	\end{itemize}		
@@ -478,23 +560,22 @@
 		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
 	\end{columns}
 	
-	\begin{table}
-    \begin{adjustbox}{max width=\textwidth}
-      \begin{tabular}{l c}
-        \toprule
-        Detector & Total nb. of hits \\
-        \hline
-        Hits in the VXD barrel & 2737 \\
-        Hits in the VXD endcap & 2537 \\
-        \bottomrule
-      \end{tabular}
-    \end{adjustbox}
-  \end{table}
+%	\begin{table}
+%    \begin{adjustbox}{max width=\textwidth}
+%      \begin{tabular}{l c}
+%        \toprule
+%        Detector & Total nb. of hits \\
+%        \hline
+%        Hits in the VXD barrel & 2737 \\
+%        Hits in the VXD endcap & 2537 \\
+%        \bottomrule
+%      \end{tabular}
+%    \end{adjustbox}
+%  \end{table}
 	
 	
 	\begin{itemize}
-	\item The trend is as expected
-	\item More investigation \& tuning on the hit reconstruction and cuts in Geant4 simulations is needed
+	\item Comparisons with the ILCSoft validated
 	\end{itemize}	
 	
 \end{frame}
@@ -559,17 +640,20 @@
   \frametitle{Summary \& Outlook}
   
 	\begin{itemize}
-	 \item FCCee-detector concept simulation with FCCSW \vspace{0.2cm}
-	 	\begin{itemize}
-	  	\item Implementation of the geometry \vspace{0.2cm}
-	  	\item Simulation \vspace{0.2cm}
-	  	\item Validation \vspace{0.5cm}
-	  	\end{itemize}
-	\item Study of beam-induced backgrounds: e+e- incoherent pairs \vspace{0.2cm}
+	\item Full simulation of the FCCee-IDEA detector concept with FCCSW
+	\item Implementation of the drift chamber 
+		$\Rightarrow$ geometry, segmentation, simulation \& reconstuction
+	\item Validations done and still ongoing 
+	\item First physics studies:
 		\begin{itemize}
-	  	\item Estimation of the occupancy in the VXD and DCH
+		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
+	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
 	  	\end{itemize}
-  \end{itemize}
+	\item Future work:
+		\begin{itemize}
+		\item Tracking
+		\end{itemize}
+  	\end{itemize}
 
 \end{frame}
 
