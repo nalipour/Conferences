@@ -15,7 +15,7 @@
 %	PACKAGES AND THEMES
 %----------------------------------------------------------------------------------------
 
-\documentclass[hyperref={colorlinks=true,pdfpagelabels=false,linkcolor=black}, xcolor=dvipsnames,10pt]{beamer}
+\documentclass[aspectratio=169, hyperref={colorlinks=true,pdfpagelabels=false,linkcolor=black}, xcolor=dvipsnames,10pt]{beamer}
 \hypersetup{pdftex=true, colorlinks=true, breaklinks=true, linkcolor=black, menucolor=blue, pagecolor=blue, urlcolor=cyan}
 
 
@@ -61,7 +61,7 @@
 %----------------------------------------------------------------------------------------
 \title[]{Beam-background impact in the IDEA drift chamber}
 \author[Niloufar Alipour Tehrani]{Niloufar Alipour Tehrani
-  \vspace{0.3cm} }
+  }
 
 \institute[CERN]{} 
 \date[10 April 2018]{FCC-ee physics \& experiments: \vspace{0.3cm}
@@ -104,35 +104,12 @@
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Introduction}
-	
-	\begin{enumerate}
-	\item FCC experiment and FCCSW
-	\item IDEA detector concept
-	\item Drift chamber
-	\item Geometry implementation
-	\item Segmentation and validation
-	\item Simulation
-	\item Material budget scan
-	\item Background studies
-	\end{enumerate}
-	
-
-%		\centering
-%    		\includegraphics[width=\textwidth]{figures/cellid2359297}
-
-
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{FCC Software}
+	\frametitle{FCC Software: FCCSW}
 	
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -150,6 +127,7 @@
 		\begin{itemize}
 		\item LHC: Gaudi
 		\item CLIC: DD4hep
+		\item New solutions $\Rightarrow$ where needed
 		\end{itemize}
 	\end{itemize}
 	
@@ -158,15 +136,6 @@
 	\includegraphics[width=\textwidth]{../figures/cernFCC}
 	\end{columns}
 	
-	\vspace{0.5cm}
-
-	\begin{block}{FCCSW simulation pipeline}
-	\smartdiagramset{back arrow disabled=true}
-  	\smartdiagram[flow diagram:horizontal]
-  	{%
-    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
-  	}
-	\end{block}
 
 \end{frame}
 
@@ -174,12 +143,27 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{FCCee: IDEA detector concept}
+	\frametitle{2 FCCee detector concepts}
 	
+		\begin{itemize}
+		\item The CLD detector concept (c.f. CLD detector model overview, Oleksandr~Viazlo)
+			\begin{itemize}
+			\item An adaptation of the CLIC detector model 
+			\\ $\Rightarrow$ (Silicon-based vertex and tracking detectors)
+			\item Widely simulated with the ILCSoft
+			\end{itemize}
+		\item The IDEA detector concept $\Rightarrow$ \textcolor{Red}{focus of this talk}
+			\begin{itemize}
+			\item Simulated using FCCSW
+			\end{itemize}
+		\end{itemize}
+
+	
+	\vspace{-1.5cm}
 	\begin{columns}
 	\column{0.5\textwidth}
 	
-	\begin{block}{Ultimate Goal}
+	\begin{block}{IDEA: Ultimate Goal}
 	\begin{itemize}
 	\item Vertex detector: MAPS
 	\item Ultra-light drift chamber with PID
@@ -190,57 +174,35 @@
 	\item Surrounded by large tracking volume (R$\sim$8~m) for very weakly coupled (long-lived) particles
 	\end{itemize}
 	\end{block}
+	
+	\vspace{-2cm}
 	\column{0.5\textwidth}
 	\centering
 	\includegraphics[width=\textwidth]{../figures/FCCeeIDEAConcept.png}
 	\end{columns}
 
-	\begin{block}{Implementation in FCCSW}
-	\begin{itemize}
-	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
-	\item Vertex detector also taken from the CLD concept.
-	\item The drift chamber implemented from scratch in FCCSW.
-	\end{itemize}
-	\end{block}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Vertex Detector}
-	
-	\begin{columns}
-	\column{0.5\textwidth}
-	
-	\begin{block}{Geometry}
-	\begin{itemize}
-	\item Barrel: 3 double-sided layers
-	\item Endcap: 3 double-sided disks
-	\end{itemize}
-	\end{block}
-
-	
-	\column{0.5\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/Vertex.png}
-	\end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Drift Chamber}
-	
+	\frametitle{IDEA Drift Chamber (DCH)}
 	
 	\begin{columns}	
-	\column{0.5\textwidth}	
-		\begin{block}{Parameters}
-  \begin{table}
-    \begin{adjustbox}{max width=\textwidth}
-      \begin{tabular}{l l}
-        \toprule
+	\column{0.5\textwidth}
+	
+	\begin{itemize}
+	\item Track reconstruction \& particle ID
+	\item Layers divided into cells rotated with a certain stereo angle
+	\end{itemize}
+
+
+	\begin{block}{Parameters}
+  	\begin{table}
+    	\begin{adjustbox}{max width=\textwidth}
+    	  \begin{tabular}{l l}
+    	    \toprule
         % & Dimensions    \\
         % \hline
         Length & 4500 mm \\ 
@@ -256,27 +218,65 @@
         Single cell resolution & 0.1 mm \\
         \bottomrule
       \end{tabular}
-    \end{adjustbox}
-  \end{table}
-		\end{block}
+    	\end{adjustbox}
+  	\end{table}
+	\end{block}
 
 
 	\column{0.5\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
+	
+	\begin{itemize}
+	\item Field wires: provide a uniform electric field
+	\item Sensitive wires: record signal
+	\item Field to sense wire ratio: 5:1
+	\end{itemize}
+	
+	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
 	\end{columns}
 	
 	
 \end{frame}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Geometry implementation in DD4hep}
+	\frametitle{FCCSW simulation chain}
 	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description.png}
+	\begin{enumerate}
+	\item Detector geometry description with DD4hep
+		\begin{itemize}
+		\item Collaborative effort with CLIC, ILC and LHCb
+		\item The IR region and the VXD from CLD are as well implemented in DD4hep
+		\item Definition of the gas layers in the DCH 
+		\end{itemize}
+	\item Segmentation of the sensitive areas:
+		\begin{itemize}
+		\item Information on the position of the sense wires instead of placing physical volumes
+		\item Speed up the simulation
+		\end{itemize}
+	\item Geant4 simulation:
+		\begin{itemize}
+		\item Calculate the E\textsubscript{dep} for each ionisation action
+		\item Charge drift to the wires
+		\end{itemize}
+	\item Hit reconstruction:
+		\begin{itemize}
+		\item Combination of individual hit calculations from (3)
+		\item Calculation of the signal in the wire
+		\end{itemize}
+	\end{enumerate}		
+	
+	\smartdiagramset{back arrow disabled=true}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
+  	
 
 \end{frame}
 
@@ -284,12 +284,130 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Segmentation}
+	\frametitle{1. Geometry}
+	
+	\begin{itemize}
+	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
+	\item Vertex detector also taken from the CLD concept.
+	\item The drift chamber implemented from scratch in FCCSW.
+	\end{itemize}
+	
+	\begin{block}{Visualisation with FCCSW}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description_zoomVXD.png}
+	\end{block}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{2. Segmentation Strategy for DCH (1)}
+
+
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+    \item Compute the azimuth angle of the hit $\phi$ for $(x_{hit},
+      y_{hit})$ 
+      \begin{itemize}
+      \item (like if the wires were parallel to the z-axis).
+      \end{itemize}
+
+    \begin{equation}
+      \phi = \arctan(y_{hit}/x_{hit})
+    \end{equation}
+
+    \item The angle between the hit position and the wire detecting it
+      is calculated:
+
+    \begin{equation}
+      \alpha = 2 \arcsin({{z_{hit} tan(\epsilon)} \over {2R}})
+    \end{equation}
+  \item Total hit azimuthal angle: $\phi+\alpha$
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{tikzpicture}[scale=0.8]
+
+      \pgfmathsetmacro{\R}{2}
+      \pgfmathsetmacro{\wireAng}{45}
+      
+      \coordinate (O) at (0,0);
+      \foreach \angle in 
+      {0,45,...,360} 
+      { 
+        \fill (\angle:\R) circle (0.1cm); 
+      } 
+      \draw (0,0) circle (\R);
+
+      \draw 
+      (\R,0) coordinate (xcoord) -- 
+      node[midway,below] {R} (O) -- 
+      (\wireAng:\R) coordinate (slcoord)
+      pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
+
+      \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
+      (deltay) [midway,right] {a};
+
+      \begin{scope}[]
+        \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+        \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+      \end{scope}
+    \end{tikzpicture}
+\\
+
+    \begin{tikzpicture}[scale=0.7]
+      \begin{scope}
+        \coordinate (origin) at (0,4);
+
+        \draw[->] (-0.5,0.5) -- (5,0.5) node[right] {$z$};
+        \draw[->] (-0.5, 0.5) -- (-0.5,5) node[above] {$\phi$};
+
+        \draw[-,line width=1pt] (0, 1) -- (0, 4);
+        \draw[-,line width=1pt] (4, 1.5) -- (4, 4.5);
+
+        \draw[-,line width=2pt] (0, 1) -- (4, 1.5);
+        \draw[-,line width=2pt] (0, 2) -- (4, 2.5);
+        \draw[-,line width=2pt] (0, 3) -- (4, 3.5);
+        \draw[-,line width=2pt] (0, 4) -- (4, 4.5) node
+        (pivot) [] {};
+        \draw[<->,line width=0.5pt] (0, 4.1) -- (4, 4.6) node
+        (length) [above] {wire length};
+        \draw[<->,line width=0.5pt,red] (4.2, 1.5) -- (4.2, 2.5) node
+        (deltay) [midway, right] {a};
+
+        \draw[-,dashed, line width=0.5pt] (origin) -- (3, 4) node
+        (horizon) [] {};
+        \pic [draw, ->, "$\epsilon$", angle eccentricity=1.2, angle radius=2cm] {angle = horizon--origin--pivot};
+
+
+        \draw[-,dashed, blue] (0, 1.5) -- (4, 2);
+        \draw[-, dashed, blue] (0, 2.5) -- (4, 3);
+        \draw[-, dashed, blue] (0, 3.5) -- (4, 4);
+
+        % \draw[-,blue,line width=1pt] (2, 5) -- (2, 0.7) node
+        % (segz) [right] {z segmentation (w)};
+      \end{scope}
+    \end{tikzpicture}
+  \end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{2. Segmentation: validation in simulation (2)}
 		
 	\begin{columns}[t]
 		\column{0.5\textwidth}
 		\begin{itemize}
-		\item Information on the location of the wires \vspace{0.2cm}
+		\item Information on the location of the sensitive wires \vspace{0.2cm}
 		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}ß
 		\item Different granularity for different layers in the DCH \vspace{0.2cm}
 		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
@@ -312,25 +430,37 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Simulation of the DCH}
+	\frametitle{3. Hit simulation and reconstruction of the DCH }
 	
+	\begin{block}{Hit Simulation}
 	\begin{itemize}
-	\item Stepping in the gas with a step length of 2~mm \vspace{0.2cm}
-	\item Reject ionisation acts with: \vspace{0.2cm}
+	\item Geant4: Stepping in the gas with a G4Step length of 2~mm 
+	\item Reject ionisation acts with:
 		\begin{itemize}
 		\item E\textsubscript{dep}$<$~10~eV
 		\item \texttt{G4Step} length~$<~5\mu$m
-		\end{itemize} \vspace{0.2cm}
+		\end{itemize} 
 	
-	\item Drift the E\textsubscript{dep} to the nearest wire \vspace{0.2cm}
+	\item Drift the charge deposition to the nearest wire 
 		\begin{itemize}
-		\item Distance of the closest approach
-		\item Assume a constant drift velocity of 2~cm/$\mu$s
-		\item Calculate drift time
-		\end{itemize} \vspace{0.2cm}
-		
-	\item For each wire, merge the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
+		\item Compute the distance of the closest approach
+		\item Calculate the drift time assuming a constant drift velocity of 2~cm/$\mu$s
+		\item Smear with the timing resolution of ????
+		\item Calculate the total time of the hit \\
+		\begin{equation}
+	      t_{hit} = t_{drift}+t_{\text{signal}}+t_{\text{particle flight}}
+    		\end{equation}
+		\end{itemize} 
 	\end{itemize}
+	\end{block}
+		
+	\begin{block}{Reconstruction}
+		\begin{itemize}
+		\item \textcolor{Red}{Hit}: regroup the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
+		\end{itemize}
+	\end{block}
+
+	
 	
 \end{frame}
 
@@ -339,13 +469,13 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Number of layers vs. $\theta$}
+	\frametitle{Number of sensitive layers vs. $\theta$}
 	
 	\begin{itemize}
 		\item Number of layers hit by 100~GeV $\mu-$ 
 		\begin{itemize}
 
-		\item $\theta=0^{\circ}$: very forward direction
+		\item $\theta=0^{\circ}$: in the forward direction
 		\item $\theta=90^{\circ}$: in the barrel
 		\item Averaged over $\phi$	
 		\end{itemize}
@@ -365,26 +495,10 @@
 		\end{block}
 	\end{columns}
 	
+	
 \end{frame}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Material Budget Scan: work in progress}
-	
-	\begin{columns}
-  	\column{0.5\textwidth}	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/material/depthpos.pdf}
-	
-	\column{0.5\textwidth}	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/material/x0pos.pdf}
-  \end{columns}
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
@@ -394,6 +508,7 @@
 
 	\begin{itemize}
 	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
+	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
 	\item E\textsubscript{cm} = 365~GeV
 	\item Total nb. of particles: $\sim6200$
 	\end{itemize}		
@@ -428,6 +543,17 @@
 	
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Background}
+	
+	\centering
+	\includegraphics[width=0.7\textwidth]{../figures/pairs_R_Z.pdf} 
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -451,23 +577,22 @@
 		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
 	\end{columns}
 	
-	\begin{table}
-    \begin{adjustbox}{max width=\textwidth}
-      \begin{tabular}{l c}
-        \toprule
-        Detector & Total nb. of hits \\
-        \hline
-        Hits in the VXD barrel & 2737 \\
-        Hits in the VXD endcap & 2537 \\
-        \bottomrule
-      \end{tabular}
-    \end{adjustbox}
-  \end{table}
+%	\begin{table}
+%    \begin{adjustbox}{max width=\textwidth}
+%      \begin{tabular}{l c}
+%        \toprule
+%        Detector & Total nb. of hits \\
+%        \hline
+%        Hits in the VXD barrel & 2737 \\
+%        Hits in the VXD endcap & 2537 \\
+%        \bottomrule
+%      \end{tabular}
+%    \end{adjustbox}
+%  \end{table}
 	
 	
 	\begin{itemize}
-	\item The trend is as expected
-	\item More investigation \& tuning on the hit reconstruction and cuts in Geant4 simulations is needed
+	\item Comparisons with the ILCSoft validated
 	\end{itemize}	
 	
 \end{frame}
@@ -532,17 +657,20 @@
   \frametitle{Summary \& Outlook}
   
 	\begin{itemize}
-	 \item FCCee-detector concept simulation with FCCSW \vspace{0.2cm}
-	 	\begin{itemize}
-	  	\item Implementation of the geometry \vspace{0.2cm}
-	  	\item Simulation \vspace{0.2cm}
-	  	\item Validation \vspace{0.5cm}
-	  	\end{itemize}
-	\item Study of beam-induced backgrounds: e+e- incoherent pairs \vspace{0.2cm}
+	\item Full simulation of the FCCee-IDEA detector concept with FCCSW
+	\item Implementation of the drift chamber 
+		$\Rightarrow$ geometry, segmentation, simulation \& reconstuction
+	\item Validations done and still ongoing 
+	\item First physics studies:
 		\begin{itemize}
-	  	\item Estimation of the occupancy in the VXD and DCH
+		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
+	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
 	  	\end{itemize}
-  \end{itemize}
+	\item Future work:
+		\begin{itemize}
+		\item Tracking
+		\end{itemize}
+  	\end{itemize}
 
 \end{frame}
 
