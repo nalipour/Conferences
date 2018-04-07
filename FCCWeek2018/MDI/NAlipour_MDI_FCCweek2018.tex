@@ -236,9 +236,60 @@
 	\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
 	\end{columns}
 	
-	
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{The interaction region as implemented in FCCSW}
+	
+	\begin{itemize}
+	\item Beam-pipe, beam instrumentations and the vertex detector are taken from the CLD concept
+	\item The DCH implemented from scratch in FCCSW
+	\end{itemize}
+	
+	\begin{block}{Visualisation with FCCSW}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description_zoomVXD.png}
+	\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{CLD vs. IDEA interaction region}
+
+	\begin{itemize}
+	\item Coverage of the CLD and the IDEA detectors in the interaction region
+	\item Both detectors have comparable coverage
+	\item Difference in the tracking regions:
+		\begin{itemize}
+		\item Number of layers
+		\item Material budget (and type)
+		\item CLD tracker separated in the endcap and the barrel regions
+		\end{itemize}
+	\end{itemize}
+	
+		\centering
+	\begin{tabular}{l|l|l}
+	Parameters & FCCee (CLD) & FCCee (IDEA) \\ \hline
+	VXD Barrel r\textsubscript{in} & \textcolor{Green}{17 mm} & \textcolor{Green}{17 mm} \\
+	VXD Barrel r\textsubscript{out} & 59 mm & 59 mm \\
+	VXD Barrel length & 250 mm & 250 mm \\
+	VXD Endcap r\textsubscript{in} & 24 - 45 mm & 24 - 45 mm \\
+	VXD Endcap r\textsubscript{out} & 102 mm & 102 mm \\
+	VXD Endcap z\textsubscript{position} & 159-301 mm & 159-301 mm \\
+	Tracker r\textsubscript{in} & \textcolor{Green}{127 mm} & \textcolor{Green}{345 mm} \\
+	Tracker r\textsubscript{out} & \textcolor{Green}{2100 mm} & \textcolor{Green}{2000 mm} \\
+	Tracker length & \textcolor{Green}{4720 mm} & \textcolor{Green}{4500 mm} \\
+	\end{tabular}
+
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,6 +322,7 @@
 		\end{itemize}
 	\end{enumerate}		
 	
+	\centering
 	\smartdiagramset{back arrow disabled=true}
   	\smartdiagram[flow diagram:horizontal]
   	{%
@@ -280,26 +332,372 @@
 
 \end{frame}
 
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{1. Geometry}
+	\frametitle{Segmentation of the DCH}
+		
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+		\begin{itemize}
+		\item Information on the location of the sensitive wires \vspace{0.2cm}
+		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}
+		\item Different granularity for different layers in the DCH \vspace{0.2cm}
+		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
+			$\Rightarrow$ Accessible in every step of the simulation
+		\end{itemize}
 	
+		\column{0.5\textwidth}	
+		\begin{itemize}
+		\item First layer of the DCH
+		\item Hits having the same wire ID are shown by the same color
+		\item Validates the segmentation
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/allHits}
+	\end{columns}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Hit simulation and reconstruction of the DCH}
+	
+	\begin{block}{Hit Simulation}
 	\begin{itemize}
-	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
-	\item Vertex detector also taken from the CLD concept.
-	\item The drift chamber implemented from scratch in FCCSW.
-	\end{itemize}
+	\item Geant4: Stepping in the gas with a G4Step length of 2~mm 
+	\item Reject ionisation acts with:
+		\begin{itemize}
+		\item E\textsubscript{dep}$<$~10~eV
+		\item \texttt{G4Step} length~$<~5\mu$m
+		\end{itemize} 
 	
-	\begin{block}{Visualisation with FCCSW}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description_zoomVXD.png}
+	\item Drift the charge deposition to the nearest wire 
+		\begin{itemize}
+		\item Compute the distance of the closest approach
+		\item Calculate the drift time assuming a constant drift velocity of 2~cm/$\mu$s
+		\item Calculate the total time of the hit \\
+		\begin{equation}
+	      t_{hit} = t_{drift}+t_{\text{signal}}+t_{\text{particle flight}}
+    		\end{equation}
+		\end{itemize} 
+	\end{itemize}
+	\end{block}
+		
+	\begin{block}{Reconstruction}
+		\begin{itemize}
+		\item \textcolor{Red}{Hit}: regroup the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
+		\end{itemize}
 	\end{block}
 
+	
+	
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Number of sensitive layers vs. $\theta$}
+	
+	\begin{itemize}
+		\item Number of layers hit by 100~GeV $\mu-$ 
+		\begin{itemize}
+
+		\item $\theta=0^{\circ}$: in the forward direction
+		\item $\theta=90^{\circ}$: in the barrel
+		\item Averaged over $\phi$	
+		\end{itemize}
+	\end{itemize}
+		
+	\begin{columns}	
+		\column{0.5\textwidth}	
+		\begin{block}{VXD}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/theta_nbHits_VXD.pdf}
+		\end{block}
+	
+		\column{0.5\textwidth}	
+		\begin{block}{DCH}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/theta_nbHits_DCH.pdf} 	
+		\end{block}
+	\end{columns}
+	
+	
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of the beam background}
+
+	\begin{columns}
+	\column{0.7\textwidth}
+	\begin{itemize}
+	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
+	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
+	\item E\textsubscript{cm} = 365~GeV
+	\item Total nb. of particles: $\sim6200$
+	\end{itemize}		
+	\column{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pT.pdf} 
+	\end{columns}	
+	
+	\begin{block}{Momentum distribution}
+	\begin{columns}
+	\column{0.33\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_px.pdf} \\									
+	\column{0.33\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_py.pdf}
+		 
+	\column{0.33\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pz.pdf} 
+		\end{columns}	
+	\end{block}
+	
+%	\begin{table}
+%    \begin{adjustbox}{max width=\textwidth}
+%      \begin{tabular}{l c}
+%        \toprule
+%        Events & Average number per BX \\
+%        \hline
+%        Total particles & 6160 \\
+%        Hits in the VXD barrel & 2737 \\
+%        Hits in the VXD endcap & 2537 \\
+%        Hits in the DCH & 3345.7 \\
+%        \bottomrule
+%      \end{tabular}
+%    \end{adjustbox}
+%  \end{table}
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Pair particles in the detector}
+	
+	\begin{columns}
+	\column{0.3\textwidth}
+	\begin{itemize}
+	\item Pair particles production in 1 BX
+	\item The detector parts are highlighted
+	\item In this example no track of pairs reaches the tracker
+	\end{itemize}
+	
+	\column{0.7\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/pairs_R_Z_legend.pdf}
+		
+	\end{columns}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of incoherent pairs in the VXD}
+
+	\begin{itemize}
+	\item The number of hits is averaged over 30 BX
+	\end{itemize}	
+	
+	
+	\begin{columns}
+	\column{0.5\textwidth}
+		\begin{itemize}
+		\item Vertex Barrel
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_barrel.pdf}
+		
+	\column{0.5\textwidth}
+		\begin{itemize}
+		\item Vertex Endcap
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
+	\end{columns}
+	
+%	\begin{table}
+%    \begin{adjustbox}{max width=\textwidth}
+%      \begin{tabular}{l c}
+%        \toprule
+%        Detector & Total nb. of hits \\
+%        \hline
+%        Hits in the VXD barrel & 2737 \\
+%        Hits in the VXD endcap & 2537 \\
+%        \bottomrule
+%      \end{tabular}
+%    \end{adjustbox}
+%  \end{table}
+	
+	
+	\begin{itemize}
+	\item Comparisons with the ILCSoft in progress 
+	\end{itemize}	
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of incoherent pairs in the DCH}
+
+	\begin{columns}
+	\column{0.5\textwidth}	
+		\begin{itemize}
+		\item Secondary vertices
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/secondaryVertices.pdf}
+			
+	\end{columns}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of incoherent pairs in the DCH}
+
+	\begin{columns}[t]
+		\column{0.5\textwidth}
+		\begin{itemize}
+		\item Number of wires with different IDs recorded a signal
+			\begin{itemize}
+			\item Average: 3345.7 wires
+			\end{itemize}
+		\end{itemize}
+	
+		\centering
+		\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
+	
+
+		
+		\column{0.5\textwidth}
+		\begin{itemize}
+		\item Number of hits recorded per wire in the first BX
+		\item Mostly 1-hit per wire
+		\item Several hits per wire: pile-up or same 
+		\end{itemize}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/DCH/nb_hits_per_wire.pdf}
+		
+	\end{columns}
+	
+	\begin{itemize}
+	\item To be investigated further: merging hits belonging to the same wire and having a drift time smaller than the maximum drift time in a cell.
+	\item Occupancy as a function of the cell/voxel
+	\end{itemize}		
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Background studies for the DCH: number of hits per layer}
+
+	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/DCH/DCH_hits_layer.pdf}
+		
+	
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\label{lastslide}
+\begin{frame}
+  \frametitle{Summary \& Outlook}
+  
+	\begin{itemize}
+	\item Full simulation of the FCCee-IDEA detector concept with FCCSW
+	\item Implementation of the drift chamber 
+		$\Rightarrow$ geometry, segmentation, simulation \& reconstuction
+	\item Validations done and still ongoing 
+	\item First physics studies:
+		\begin{itemize}
+		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
+	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
+	  	\end{itemize}
+	\item Future work:
+		\begin{itemize}
+		\item Study of the effect of the synchrotron radiation
+		\item Optimisation of the geometry of the DCH
+		\item Track reconstruction in FCCSW
+		\end{itemize}
+  	\end{itemize}
+
+	\vspace{2cm}
+	\centering
+	\Large{\textbf{Thank you for your attention!}}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%  \frametitle{Number of times the same wire is hit per BX}
+%
+%  \begin{columns}
+%  	\column{0.33\textwidth}	
+%  	\begin{itemize}
+%  	\item BX 0
+%  	\end{itemize}
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX0.pdf}
+%	
+%	\column{0.33\textwidth}
+%	\begin{itemize}
+%  	\item BX 1
+%  	\end{itemize}
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX1.pdf}
+%	
+%	\column{0.33\textwidth}	
+%  	\begin{itemize}
+%  	\item BX 2
+%  	\end{itemize}
+%	\centering
+%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX2.pdf}
+%  \end{columns}
+%
+%\end{frame}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+	\centering
+	\Huge{Backup slides}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
@@ -398,314 +796,7 @@
 
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{2. Segmentation: validation in simulation (2)}
-		
-	\begin{columns}[t]
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Information on the location of the sensitive wires \vspace{0.2cm}
-		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}ß
-		\item Different granularity for different layers in the DCH \vspace{0.2cm}
-		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
-			$\Rightarrow$ Accessible in every step of the simulation
-		\end{itemize}
-	
-		\column{0.5\textwidth}	
-		\begin{itemize}
-		\item First layer of the DCH
-		\item Hits having the same wire ID are shown by the same color
-		\item Validates the segmentation
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/allHits}
-	\end{columns}
-	
-\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{3. Hit simulation and reconstruction of the DCH }
-	
-	\begin{block}{Hit Simulation}
-	\begin{itemize}
-	\item Geant4: Stepping in the gas with a G4Step length of 2~mm 
-	\item Reject ionisation acts with:
-		\begin{itemize}
-		\item E\textsubscript{dep}$<$~10~eV
-		\item \texttt{G4Step} length~$<~5\mu$m
-		\end{itemize} 
-	
-	\item Drift the charge deposition to the nearest wire 
-		\begin{itemize}
-		\item Compute the distance of the closest approach
-		\item Calculate the drift time assuming a constant drift velocity of 2~cm/$\mu$s
-		\item Smear with the timing resolution of ????
-		\item Calculate the total time of the hit \\
-		\begin{equation}
-	      t_{hit} = t_{drift}+t_{\text{signal}}+t_{\text{particle flight}}
-    		\end{equation}
-		\end{itemize} 
-	\end{itemize}
-	\end{block}
-		
-	\begin{block}{Reconstruction}
-		\begin{itemize}
-		\item \textcolor{Red}{Hit}: regroup the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
-		\end{itemize}
-	\end{block}
-
-	
-	
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Number of sensitive layers vs. $\theta$}
-	
-	\begin{itemize}
-		\item Number of layers hit by 100~GeV $\mu-$ 
-		\begin{itemize}
-
-		\item $\theta=0^{\circ}$: in the forward direction
-		\item $\theta=90^{\circ}$: in the barrel
-		\item Averaged over $\phi$	
-		\end{itemize}
-	\end{itemize}
-		
-	\begin{columns}	
-		\column{0.5\textwidth}	
-		\begin{block}{VXD}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/theta_nbHits_VXD.pdf}
-		\end{block}
-	
-		\column{0.5\textwidth}	
-		\begin{block}{DCH}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/theta_nbHits_DCH.pdf} 	
-		\end{block}
-	\end{columns}
-	
-	
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Background studies}
-
-	\begin{itemize}
-	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
-	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
-	\item E\textsubscript{cm} = 365~GeV
-	\item Total nb. of particles: $\sim6200$
-	\end{itemize}		
-	
-	\begin{block}{Momentum distribution}
-	\begin{columns}
-	\column{0.5\textwidth}
-		\centering
-		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_px.pdf} \\									\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_py.pdf}
-	\column{0.5\textwidth}
-		\centering
-		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_pz.pdf}  \\
-		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_pT.pdf} 
-
-		\end{columns}	
-	\end{block}
-	
-%	\begin{table}
-%    \begin{adjustbox}{max width=\textwidth}
-%      \begin{tabular}{l c}
-%        \toprule
-%        Events & Average number per BX \\
-%        \hline
-%        Total particles & 6160 \\
-%        Hits in the VXD barrel & 2737 \\
-%        Hits in the VXD endcap & 2537 \\
-%        Hits in the DCH & 3345.7 \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{adjustbox}
-%  \end{table}
-	
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Background}
-	
-	\centering
-	\includegraphics[width=0.7\textwidth]{../figures/pairs_R_Z.pdf} 
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Background studies for the VXD: work in progress}
-
-	
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-		\item Vertex Barrel
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_barrel.pdf}
-		
-	\column{0.5\textwidth}
-		\begin{itemize}
-		\item Vertex Endcap
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
-	\end{columns}
-	
-%	\begin{table}
-%    \begin{adjustbox}{max width=\textwidth}
-%      \begin{tabular}{l c}
-%        \toprule
-%        Detector & Total nb. of hits \\
-%        \hline
-%        Hits in the VXD barrel & 2737 \\
-%        Hits in the VXD endcap & 2537 \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{adjustbox}
-%  \end{table}
-	
-	
-	\begin{itemize}
-	\item Comparisons with the ILCSoft validated
-	\end{itemize}	
-	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Background studies for the DCH: work in progress}
-
-	\begin{columns}[t]
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Number of wires with different IDs recorded a signal
-			\begin{itemize}
-			\item Average: 3345.7 wires
-			\end{itemize}
-		\end{itemize}
-	
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
-	
-
-		
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Number of hits recorded per wire in the first BX
-		\item Mostly 1-hit per wire
-		\item Several hits per wire: pile-up or same 
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DCH/nb_hits_per_wire.pdf}
-		
-	\end{columns}
-	
-	\begin{itemize}
-	\item To be investigated further: merging hits belonging to the same wire and having a drift time smaller than the maximum drift time in a cell.
-	\item Occupancy as a function of the cell/voxel
-	\end{itemize}		
-	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Background studies for the DCH: number of hits per layer}
-
-	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/DCH/DCH_hits_layer.pdf}
-		
-	
-	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\label{lastslide}
-\begin{frame}
-  \frametitle{Summary \& Outlook}
-  
-	\begin{itemize}
-	\item Full simulation of the FCCee-IDEA detector concept with FCCSW
-	\item Implementation of the drift chamber 
-		$\Rightarrow$ geometry, segmentation, simulation \& reconstuction
-	\item Validations done and still ongoing 
-	\item First physics studies:
-		\begin{itemize}
-		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
-	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
-	  	\end{itemize}
-	\item Future work:
-		\begin{itemize}
-		\item Tracking
-		\end{itemize}
-  	\end{itemize}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}
-%  \frametitle{Number of times the same wire is hit per BX}
-%
-%  \begin{columns}
-%  	\column{0.33\textwidth}	
-%  	\begin{itemize}
-%  	\item BX 0
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX0.pdf}
-%	
-%	\column{0.33\textwidth}
-%	\begin{itemize}
-%  	\item BX 1
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX1.pdf}
-%	
-%	\column{0.33\textwidth}	
-%  	\begin{itemize}
-%  	\item BX 2
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX2.pdf}
-%  \end{columns}
-%
-%\end{frame}
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
