@@ -265,7 +265,6 @@
 	\frametitle{CLD vs. IDEA interaction region}
 
 	\begin{itemize}
-	\item Coverage of the CLD and the IDEA detectors in the interaction region
 	\item Both detectors have comparable coverage
 	\item Difference in the tracking regions:
 		\begin{itemize}
@@ -498,9 +497,9 @@
 	\begin{columns}
 	\column{0.3\textwidth}
 	\begin{itemize}
-	\item Pair particles production in 1 BX
-	\item The detector parts are highlighted
-	\item In this example no track of pairs reaches the tracker
+	\item Pair particles production in 1 BX \vspace{0.2cm}
+	\item The detector parts are highlighted \vspace{0.2cm}
+	\item In this example no track of pairs reaches the tracker \vspace{0.2cm}
 	\end{itemize}
 	
 	\column{0.7\textwidth}
@@ -553,80 +552,76 @@
 	
 	
 	\begin{itemize}
-	\item Comparisons with the ILCSoft in progress 
+	\item Comparisons with the ILCSoft in progress
+	\item The level of this background does not pose problem for pattern recognition
 	\end{itemize}	
 	
 \end{frame}
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH}
+	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
 
 	\begin{columns}
-	\column{0.5\textwidth}	
+	\column{0.5\textwidth}
 		\begin{itemize}
-		\item Secondary vertices
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/secondaryVertices.pdf}
-			
-	\end{columns}
+		\item Only few tracks of the incoherent pairs are expected to enter the DCH \vspace{0.2cm}
+		\item Most of the hits come from the back scatterings \vspace{0.2cm}
+		\item On average $\sim2000$ wires per BX are hit in the DCH (3.5\% of occupancy). \vspace{0.2cm}
+		\item Acceptable level of occupancy for tracking: $5\%$
+		\end{itemize}	
 	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH}
-
-	\begin{columns}[t]
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Number of wires with different IDs recorded a signal
-			\begin{itemize}
-			\item Average: 3345.7 wires
-			\end{itemize}
-		\end{itemize}
-	
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
-	
-
-		
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Number of hits recorded per wire in the first BX
-		\item Mostly 1-hit per wire
-		\item Several hits per wire: pile-up or same 
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DCH/nb_hits_per_wire.pdf}
-		
-	\end{columns}
-	
-	\begin{itemize}
-	\item To be investigated further: merging hits belonging to the same wire and having a drift time smaller than the maximum drift time in a cell.
-	\item Occupancy as a function of the cell/voxel
-	\end{itemize}		
-	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Background studies for the DCH: number of hits per layer}
-
-	
+	\column{0.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{../figures/DCH/DCH_hits_layer.pdf}
-		
-	
+	\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
+
+	\end{columns}
 	
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of incoherent pairs in the DCH: occupancy per layer}
+
+	\begin{itemize}
+	\item Occupancy as a function of the DCH layer for one BX
+		\begin{itemize}
+		\item The occupancy vs. DCH layer remains in acceptable ranges
+		\item More investigations are needed
+		\end{itemize}
+	\end	{itemize}
+
+	\vspace{-0.1cm}
+	\begin{columns}[t]
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_phi.pdf}
+	\begin{itemize}
+	\item Loopers vs. tracks going through the detector
+	\end{itemize}
+
+	\column{0.5\textwidth}	
+	\centering
+	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
+	\begin{itemize}
+	\item Acceptance levels of occupancy:
+		\begin{itemize}
+		\item $20\%$ for inner-most layers
+		\item $5\%$ for outer-most layers
+		\end{itemize}
+	\end{itemize}
+	
+	\end{columns}
+	
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
@@ -635,6 +630,7 @@
 \begin{frame}
   \frametitle{Summary \& Outlook}
   
+  	\vspace{1cm}
 	\begin{itemize}
 	\item Full simulation of the FCCee-IDEA detector concept with FCCSW
 	\item Implementation of the drift chamber 
@@ -644,6 +640,8 @@
 		\begin{itemize}
 		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
 	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
+	  	\item Small occupancy due to the incoherent pairs in the VXD
+	  	\item More investigation on the occupancy is needed for the DCH to draw final conclusions
 	  	\end{itemize}
 	\item Future work:
 		\begin{itemize}
@@ -653,7 +651,7 @@
 		\end{itemize}
   	\end{itemize}
 
-	\vspace{2cm}
+	\vspace{1cm}
 	\centering
 	\Large{\textbf{Thank you for your attention!}}
 \end{frame}
@@ -704,7 +702,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-  \frametitle{2. Segmentation Strategy for DCH (1)}
+  \frametitle{Segmentation Strategy for DCH (1)}
 
 
   \begin{columns}
@@ -796,31 +794,28 @@
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}
-%  \frametitle{Material Budget: Full Detector}
-%
-%  \begin{columns}
-%  	\column{0.33\textwidth}	
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/material/depth.pdf}\\
-%	\includegraphics[width=\textwidth]{../figures/material/depthpos.pdf}
-%	
-%	\column{0.33\textwidth}	
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/material/lambda.pdf}\\
-%	\includegraphics[width=\textwidth]{../figures/material/lambdapos.pdf}
-%	
-%	\column{0.33\textwidth}	
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/material/x0.pdf}\\
-%	\includegraphics[width=\textwidth]{../figures/material/x0pos.pdf}
-%  \end{columns}
-%
-%\end{frame}
+
+
+	\begin{columns}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/layerR_vs_wires.pdf}
+
+	\column{0.5\textwidth}	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
+	
+	\end{columns}
+	
+\end{frame}
+
+
 %----------------------------------------------------------------------------------------
 %	End of Document
 %----------------------------------------------------------------------------------------
