@@ -247,6 +247,9 @@
 	
 	\begin{itemize}
 	\item Beam-pipe, beam instrumentations and the vertex detector are taken from the CLD concept
+		\begin{itemize}
+		\item Temporary design of VXD for the IDEA detector $\Rightarrow $ ultimate goal: MAPS
+		\end{itemize}
 	\item The DCH implemented from scratch in FCCSW
 	\end{itemize}
 	
@@ -440,12 +443,12 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Impact of the beam background}
+	\frametitle{Impact of the beam background on the interaction region (IR)}
 
 	\begin{columns}
 	\column{0.7\textwidth}
 	\begin{itemize}
-	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
+	\item The effect of $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions (dominated by beamstrahlung photons)
 	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
 	\item E\textsubscript{cm} = 365~GeV
 	\item Total nb. of particles: $\sim6200$
@@ -499,7 +502,7 @@
 	\begin{itemize}
 	\item Pair particles production in 1 BX \vspace{0.2cm}
 	\item The detector parts are highlighted \vspace{0.2cm}
-	\item In this example no track of pairs reaches the tracker \vspace{0.2cm}
+	\item A fortiori, no tracks reach the DCH wires\vspace{0.2cm}
 	\end{itemize}
 	
 	\column{0.7\textwidth}
@@ -552,7 +555,7 @@
 	
 	
 	\begin{itemize}
-	\item Comparisons with the ILCSoft in progress
+	\item Comparisons with the ILCSoft in progress \& encouraging
 	\item The level of this background does not pose problem for pattern recognition
 	\end{itemize}	
 	
@@ -569,10 +572,12 @@
 	\begin{columns}
 	\column{0.5\textwidth}
 		\begin{itemize}
-		\item Only few tracks of the incoherent pairs are expected to enter the DCH \vspace{0.2cm}
-		\item Most of the hits come from the back scatterings \vspace{0.2cm}
-		\item On average $\sim2000$ wires per BX are hit in the DCH (3.5\% of occupancy). \vspace{0.2cm}
-		\item Acceptable level of occupancy for tracking: $5\%$
+		%\item Only few tracks of the incoherent pairs are expected to enter the DCH \vspace{0.2cm}
+		\item On average $\sim2000$ wires (over 56448) per BX are hit in the DCH ($\sim3.5\%$ of occupancy) \vspace{0.2cm}
+		\item Expected acceptable level of occupancy for a successful pattern recognition: $\sim5\%$ \vspace{0.2cm}
+		\item Most of the hits are due to the generation of secondary particles due to the interaction of $\gamma\gamma\rightarrow e^{+}e^{-}$ with the beampipe  \vspace{0.2cm}
+		\item The estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\
+		\textbf{\textcolor{Green}{$\Rightarrow$ Work in progress - stay tuned!}}
 		\end{itemize}	
 	
 	\column{0.5\textwidth}
@@ -591,10 +596,13 @@
 	\frametitle{Impact of incoherent pairs in the DCH: occupancy per layer}
 
 	\begin{itemize}
-	\item Occupancy as a function of the DCH layer for one BX
+	\item Occupancy vs. DCH radius per BX
 		\begin{itemize}
-		\item The occupancy vs. DCH layer remains in acceptable ranges
-		\item More investigations are needed
+		\item Pattern recognition possible for occupancy levels of:
+		\begin{itemize}
+		\item $20\%$ for inner-most layers
+		\item $5\%$ for outer-most layers
+		\end{itemize}
 		\end{itemize}
 	\end	{itemize}
 
@@ -610,13 +618,7 @@
 	\column{0.5\textwidth}	
 	\centering
 	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
-	\begin{itemize}
-	\item Acceptance levels of occupancy:
-		\begin{itemize}
-		\item $20\%$ for inner-most layers
-		\item $5\%$ for outer-most layers
-		\end{itemize}
-	\end{itemize}
+
 	
 	\end{columns}
 	
@@ -645,7 +647,8 @@
 	  	\end{itemize}
 	\item Future work:
 		\begin{itemize}
-		\item Study of the effect of the synchrotron radiation
+		\item Implementation of a realistic material around DCH for a realistic estimate of the background
+		\item Study the effect of the synchrotron radiation \& $\gamma\gamma\rightarrow$~hadrons
 		\item Optimisation of the geometry of the DCH
 		\item Track reconstruction in FCCSW
 		\end{itemize}
