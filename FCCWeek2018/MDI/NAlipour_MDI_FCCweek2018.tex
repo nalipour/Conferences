@@ -109,29 +109,37 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{FCC Software: FCCSW}
+	\frametitle{Introduction}
 	
-	\begin{columns}
-	\column{0.5\textwidth}
-	\begin{itemize}
-	\item Common software for all FCC experiments
-		\begin{itemize}
-		\item ee, hh \& eh
-		\end{itemize}
-	\item Detector and physics studies
-		\begin{itemize}
-		\item Fast \& full simulations
-		\item One software stack from event generation to physics analysis
-		\end{itemize}
-	\item Collaborative approach
-		\begin{itemize}
-		\item LHC: Gaudi
-		\item CLIC: DD4hep
-		\item New solutions $\Rightarrow$ where needed
-		\end{itemize}
-	\end{itemize}
-	
-	\column{0.5\textwidth}
+
+        \begin{columns}
+          \column{0.7\textwidth}
+          \begin{block}{FCCSW: FCC Software}
+            \begin{itemize}
+            \item Common software for all FCC experiments
+              \begin{itemize}
+              \item ee, hh \& eh
+              \end{itemize}
+            \item Detector and physics studies
+              \begin{itemize}
+              \item Fast \& full simulations
+              \item One software stack from event generation to physics analysis
+              \end{itemize}
+            \item Collaborative approach
+            \end{itemize}
+          \end{block}
+
+          \begin{block}{FCCee-IDEA \& FCCSW}
+            \begin{itemize}
+            \item A first example of implementation of the IDEA
+              detector in FCCSW
+            \item Validation of the detector
+            \item Study of the impact of beam-background in the IDEA
+              drift chamber 
+            \end{itemize}
+          \end{block}
+
+	\column{0.3\textwidth}
 	\centering
 	\includegraphics[width=\textwidth]{../figures/cernFCC}
 	\end{columns}
@@ -153,9 +161,6 @@
 			\item Widely simulated with the ILCSoft
 			\end{itemize}
 		\item The IDEA detector concept $\Rightarrow$ \textcolor{Red}{focus of this talk}
-			\begin{itemize}
-			\item Simulated using FCCSW
-			\end{itemize}
 		\end{itemize}
 
 	
@@ -166,9 +171,9 @@
 	\begin{block}{IDEA: Ultimate Goal}
 	\begin{itemize}
 	\item Vertex detector: MAPS
-	\item Ultra-light drift chamber with PID
-	\item Pre-shower counter
-	\item Double read-out calorimetry
+	\item Ultra-light drift chamber with PID (DCH)
+	\item Double read-out calorimetry (DR)
+        \item Additional disk layers to be placed in the space between DCH and DR 
 	\item 2~T solenoidal magnetic field
 	\item Instrumented return yoke
 	\item Surrounded by large tracking volume (R$\sim$8~m) for very weakly coupled (long-lived) particles
@@ -575,7 +580,7 @@
 		%\item Only few tracks of the incoherent pairs are expected to enter the DCH \vspace{0.2cm}
 		\item On average $\sim2000$ wires (over 56448) per BX are hit in the DCH ($\sim3.5\%$ of occupancy) \vspace{0.2cm}
 		\item Expected acceptable level of occupancy for a successful pattern recognition: $\sim5\%$ \vspace{0.2cm}
-		\item Most of the hits are due to the generation of secondary particles due to the interaction of $\gamma\gamma\rightarrow e^{+}e^{-}$ with the beampipe  \vspace{0.2cm}
+		\item Most of the hits are due to the backscattering   \vspace{0.2cm}
 		\item The estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\
 		\textbf{\textcolor{Green}{$\Rightarrow$ Work in progress - stay tuned!}}
 		\end{itemize}	
@@ -593,34 +598,40 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH: occupancy per layer}
+	\frametitle{Impact of incoherent pairs in the DCH: occupancy
+          per BX}
 
-	\begin{itemize}
-	\item Occupancy vs. DCH radius per BX
-		\begin{itemize}
-		\item Pattern recognition possible for occupancy levels of:
-		\begin{itemize}
-		\item $20\%$ for inner-most layers
-		\item $5\%$ for outer-most layers
-		\end{itemize}
-		\end{itemize}
-	\end	{itemize}
+        \begin{itemize}
+        \item Pattern recognition possible for occupancy levels of:
+          \begin{itemize}
+          \item $20\%$ for inner-most layers
+          \item $5\%$ for outer-most layers
+          \end{itemize}
+        \end{itemize}
 
 	\vspace{-0.1cm}
 	\begin{columns}[t]
 	\column{0.5\textwidth}
 	\centering
 	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_phi.pdf}
-	\begin{itemize}
-	\item Loopers vs. tracks going through the detector
-	\end{itemize}
+
 
 	\column{0.5\textwidth}	
 	\centering
 	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
-
-	
 	\end{columns}
+
+        \vspace{-0.2cm}
+	\begin{itemize}
+	\item The readout time of the wires (dead time): 400~ns
+        \item At the Z stage (E\textsubscript{cm}=91.2~GeV, bunch
+          spacing: 20~ns), an occupancy of 2000 wires per BX
+          becomes critical \\
+          $\Rightarrow$ Possible compensation by having $10\times$
+          less background (than E\textsubscript{cm}=365~GeV where the
+          studies have been made)?  \textbf{\textcolor{red}{$\rightarrow$ To be
+            studied!}}
+	\end{itemize}
 	
 \end{frame}
 
@@ -640,7 +651,7 @@
 	\item Validations done and still ongoing 
 	\item First physics studies:
 		\begin{itemize}
-		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
+		\item Impact of beam-induced backgrounds: $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions
 	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
 	  	\item Small occupancy due to the incoherent pairs in the VXD
 	  	\item More investigation on the occupancy is needed for the DCH to draw final conclusions
