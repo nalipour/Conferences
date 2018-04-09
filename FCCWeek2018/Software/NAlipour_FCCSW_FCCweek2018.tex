@@ -121,12 +121,13 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\begin{itemize}
 	\item Common software for all FCC experiments
 		\begin{itemize}
-		\item ee, hh \& eh
+		\item ee, hh \& eh \vspace{0.5cm}
 		\end{itemize}
 	\item Detector and physics studies
 		\begin{itemize}
 		\item Fast \& full simulations
-		\item One software stack from event generation to physics analysis
+		\item One software stack from event generation to
+                  physics analysis \vspace{0.5cm}
 		\end{itemize}
 	\item Collaborative approach
 		\begin{itemize}
@@ -170,15 +171,17 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\begin{block}{IDEA: Ultimate Goal}
 	\begin{itemize}
 	\item Vertex detector: MAPS
-	\item Ultra-light drift chamber with PID
-	\item Pre-shower counter
-	\item Double read-out calorimetry
+	\item Ultra-light drift chamber with PID (DCH)
+	\item Double read-out calorimetry (DR)
+        \item Additional disk layers to be placed in the space between DCH and DR 
 	\item 2~T solenoidal magnetic field
 	\item Instrumented return yoke
 	\item Surrounded by large tracking volume (R$\sim$8~m) for very weakly coupled (long-lived) particles
 	\end{itemize}
 	\end{block}
+
 	\column{0.5\textwidth}
+        \vspace{-1cm}
 	\centering
 	\includegraphics[width=\textwidth]{../figures/FCCeeIDEAConcept.png}
 	\end{columns}
@@ -191,25 +194,20 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 \begin{frame}
 	\frametitle{IDEA Drift Chamber (DCH)}
 	
-
-	\begin{itemize}
-	\item Track reconstruction
-	\item Particle ID
-	\item Layers divided into cells rotated with a certain stereo angle
-		\begin{itemize}
-		\item Field wires: provide a uniform electric field
-		\item Sensitive wires: record signal
-		\item Field to sense wire ratio: 5:1
-		\end{itemize}
-	\end{itemize}		
-	
 	\begin{columns}	
-	\column{0.5\textwidth}	
-		\begin{block}{Parameters}
-  \begin{table}
-    \begin{adjustbox}{max width=\textwidth}
-      \begin{tabular}{l l}
-        \toprule
+	\column{0.5\textwidth}
+	
+	\begin{itemize}
+	\item Track reconstruction \& particle ID
+	\item Layers divided into cells rotated with a certain stereo angle
+	\end{itemize}
+
+
+	\begin{block}{Parameters}
+  	\begin{table}
+    	\begin{adjustbox}{max width=\textwidth}
+    	  \begin{tabular}{l l}
+    	    \toprule
         % & Dimensions    \\
         % \hline
         Length & 4500 mm \\ 
@@ -225,17 +223,23 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
         Single cell resolution & 0.1 mm \\
         \bottomrule
       \end{tabular}
-    \end{adjustbox}
-  \end{table}
-		\end{block}
+    	\end{adjustbox}
+  	\end{table}
+	\end{block}
 
 
 	\column{0.5\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
+	
+	\begin{itemize}
+	\item Field wires: provide a uniform electric field
+	\item Sensitive wires: record signal
+	\item Field to sense wire ratio: 5:1
+	\end{itemize}
+	
+	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
 	\end{columns}
-	
-	
 \end{frame}
 
 
@@ -270,6 +274,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 		\end{itemize}
 	\end{enumerate}		
 	
+        \centering
 	\smartdiagramset{back arrow disabled=true}
   	\smartdiagram[flow diagram:horizontal]
   	{%
@@ -308,9 +313,9 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
   \frametitle{2. Segmentation Strategy for DCH (1)}
 
 
-  \begin{columns}
-    \column{0.5\textwidth}
     \begin{itemize}
+    \item Large number of wires $\Rightarrow$ requires a fast way to find the
+      location of the closest wire hit
     \item Compute the azimuth angle of the hit $\phi$ for $(x_{hit},
       y_{hit})$ 
       \begin{itemize}
@@ -330,37 +335,40 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
   \item Total hit azimuthal angle: $\phi+\alpha$
     \end{itemize}
 
-    \column{0.5\textwidth}
-    \begin{tikzpicture}[scale=0.8]
 
-      \pgfmathsetmacro{\R}{2}
-      \pgfmathsetmacro{\wireAng}{45}
-      
-      \coordinate (O) at (0,0);
-      \foreach \angle in 
-      {0,45,...,360} 
-      { 
-        \fill (\angle:\R) circle (0.1cm); 
-      } 
-      \draw (0,0) circle (\R);
+    \begin{columns}
+      \column{0.33\textwidth}
+      \column{0.33\textwidth}
+      \begin{tikzpicture}[scale=0.5]
 
-      \draw 
-      (\R,0) coordinate (xcoord) -- 
-      node[midway,below] {R} (O) -- 
-      (\wireAng:\R) coordinate (slcoord)
-      pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
+        \pgfmathsetmacro{\R}{2}
+        \pgfmathsetmacro{\wireAng}{45}
+        
+        \coordinate (O) at (0,0);
+        \foreach \angle in 
+        {0,45,...,360} 
+        { 
+          \fill (\angle:\R) circle (0.1cm); 
+        } 
+        \draw (0,0) circle (\R);
 
-      \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
-      (deltay) [midway,right] {a};
+        \draw 
+        (\R,0) coordinate (xcoord) -- 
+        node[midway,below] {R} (O) -- 
+        (\wireAng:\R) coordinate (slcoord)
+        pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
 
-      \begin{scope}[]
-        \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
-        \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
-      \end{scope}
-    \end{tikzpicture}
-\\
+        \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
+        (deltay) [midway,right] {a};
 
-    \begin{tikzpicture}[scale=0.7]
+        \begin{scope}[]
+          \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+          \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+        \end{scope}
+      \end{tikzpicture}
+
+      \column{0.33\textwidth}
+    \begin{tikzpicture}[scale=0.5]
       \begin{scope}
         \coordinate (origin) at (0,4);
 
@@ -393,7 +401,8 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
         % (segz) [right] {z segmentation (w)};
       \end{scope}
     \end{tikzpicture}
-  \end{columns}
+    \end{columns}
+
 
 \end{frame}
 
