@@ -720,12 +720,12 @@ on behalf of FCCee MDI group
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
-  \frametitle{Segmentation Strategy for DCH (1)}
+  \frametitle{Segmentation Strategy for DCH}
 
 
-  \begin{columns}
-    \column{0.5\textwidth}
     \begin{itemize}
+    \item Large number of wires $\Rightarrow$ requires a fast way to find the
+      location of the closest wire hit
     \item Compute the azimuth angle of the hit $\phi$ for $(x_{hit},
       y_{hit})$ 
       \begin{itemize}
@@ -745,37 +745,40 @@ on behalf of FCCee MDI group
   \item Total hit azimuthal angle: $\phi+\alpha$
     \end{itemize}
 
-    \column{0.5\textwidth}
-    \begin{tikzpicture}[scale=0.8]
 
-      \pgfmathsetmacro{\R}{2}
-      \pgfmathsetmacro{\wireAng}{45}
-      
-      \coordinate (O) at (0,0);
-      \foreach \angle in 
-      {0,45,...,360} 
-      { 
-        \fill (\angle:\R) circle (0.1cm); 
-      } 
-      \draw (0,0) circle (\R);
+    \begin{columns}
+      \column{0.33\textwidth}
+      \column{0.33\textwidth}
+      \begin{tikzpicture}[scale=0.5]
 
-      \draw 
-      (\R,0) coordinate (xcoord) -- 
-      node[midway,below] {R} (O) -- 
-      (\wireAng:\R) coordinate (slcoord)
-      pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
+        \pgfmathsetmacro{\R}{2}
+        \pgfmathsetmacro{\wireAng}{45}
+        
+        \coordinate (O) at (0,0);
+        \foreach \angle in 
+        {0,45,...,360} 
+        { 
+          \fill (\angle:\R) circle (0.1cm); 
+        } 
+        \draw (0,0) circle (\R);
 
-      \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
-      (deltay) [midway,right] {a};
+        \draw 
+        (\R,0) coordinate (xcoord) -- 
+        node[midway,below] {R} (O) -- 
+        (\wireAng:\R) coordinate (slcoord)
+        pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
 
-      \begin{scope}[]
-        \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
-        \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
-      \end{scope}
-    \end{tikzpicture}
-\\
+        \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
+        (deltay) [midway,right] {a};
 
-    \begin{tikzpicture}[scale=0.7]
+        \begin{scope}[]
+          \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
+          \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
+        \end{scope}
+      \end{tikzpicture}
+
+      \column{0.33\textwidth}
+    \begin{tikzpicture}[scale=0.5]
       \begin{scope}
         \coordinate (origin) at (0,4);
 
@@ -808,7 +811,8 @@ on behalf of FCCee MDI group
         % (segz) [right] {z segmentation (w)};
       \end{scope}
     \end{tikzpicture}
-  \end{columns}
+    \end{columns}
+
 
 \end{frame}
 
