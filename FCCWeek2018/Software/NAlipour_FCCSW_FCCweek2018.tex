@@ -507,49 +507,41 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 \end{frame}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Background studies}
+	\frametitle{Impact of the beam background on the interaction region (IR)}
 
+	\begin{columns}
+	\column{0.7\textwidth}
 	\begin{itemize}
-	\item The effect of incoherent $e+e-$ pairs on the interaction region (IR)
+	\item The effect of $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions (dominated by beamstrahlung photons)
 	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
 	\item E\textsubscript{cm} = 365~GeV
 	\item Total nb. of particles: $\sim6200$
 	\end{itemize}		
+	\column{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pT.pdf} 
+	\end{columns}	
 	
 	\begin{block}{Momentum distribution}
 	\begin{columns}
-	\column{0.5\textwidth}
+	\column{0.33\textwidth}
 		\centering
-		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_px.pdf} \\									\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_py.pdf}
-	\column{0.5\textwidth}
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_px.pdf} \\									
+	\column{0.33\textwidth}
 		\centering
-		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_pz.pdf}  \\
-		\includegraphics[width=0.7\textwidth]{../figures/incoherentPairs_pT.pdf} 
-
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_py.pdf}
+		 
+	\column{0.33\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pz.pdf} 
 		\end{columns}	
 	\end{block}
-	
-%	\begin{table}
-%    \begin{adjustbox}{max width=\textwidth}
-%      \begin{tabular}{l c}
-%        \toprule
-%        Events & Average number per BX \\
-%        \hline
-%        Total particles & 6160 \\
-%        Hits in the VXD barrel & 2737 \\
-%        Hits in the VXD endcap & 2537 \\
-%        Hits in the DCH & 3345.7 \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{adjustbox}
-%  \end{table}
-	
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %

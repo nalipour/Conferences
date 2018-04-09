@@ -463,6 +463,7 @@ on behalf of FCCee MDI group
 	\item Total nb. of particles: $\sim6200$
 	\end{itemize}		
 	\column{0.3\textwidth}
+        \vspace{0.2cm}
 		\centering
 		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pT.pdf} 
 	\end{columns}	
@@ -645,7 +646,20 @@ on behalf of FCCee MDI group
 
 	\column{0.5\textwidth}	
 	\centering
-	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
+        \begin{tikzpicture}
+          \node[anchor=south west,inner sep=0] (image) at
+          (0,0){\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_wires_percent.pdf}};
+          \begin{scope}[x={(image.south east)},y={(image.north west)}]
+
+            % \draw[help lines,xstep=.1,ystep=.1] (0, 0) grid (1,1);
+            % \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+            % \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10)
+            % {0.\y}; }
+            % 
+            \node[above] at (0.5, 0.8) {\textcolor{red}{Work in progress}}; 
+            
+          \end{scope}
+        \end{tikzpicture}
 	\end{columns}
 
         \vspace{-0.2cm}
