@@ -514,41 +514,31 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\frametitle{Impact of the beam background on the interaction region (IR)}
 
 	\begin{columns}
-	\column{0.7\textwidth}
+	\column{0.4\textwidth}
 	\begin{itemize}
 	\item The effect of $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions (dominated by beamstrahlung photons)
 	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
 	\item E\textsubscript{cm} = 365~GeV
-	\item Total nb. of particles: $\sim6200$
+	\item Total nb. of particles: $\sim6200$ / BX
+        \item A fortiori, no tracks reach the DCH wires\vspace{0.2cm}
 	\end{itemize}		
-	\column{0.3\textwidth}
+	\column{0.6\textwidth}
 		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pT.pdf} 
+		\includegraphics[width=\textwidth]{../figures/pairs_R_Z_legend.pdf}
 	\end{columns}	
 	
-	\begin{block}{Momentum distribution}
-	\begin{columns}
-	\column{0.33\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_px.pdf} \\									
-	\column{0.33\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_py.pdf}
-		 
-	\column{0.33\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pz.pdf} 
-		\end{columns}	
-	\end{block}
 \end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Background studies for the VXD: work in progress}
+	\frametitle{Impact of incoherent pairs in the VXD}
 
+	\begin{itemize}
+	\item The number of hits is averaged over 30 BX
+	\end{itemize}	
+	
 	
 	\begin{columns}
 	\column{0.5\textwidth}
@@ -566,61 +556,57 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
 	\end{columns}
 	
-%	\begin{table}
-%    \begin{adjustbox}{max width=\textwidth}
-%      \begin{tabular}{l c}
-%        \toprule
-%        Detector & Total nb. of hits \\
-%        \hline
-%        Hits in the VXD barrel & 2737 \\
-%        Hits in the VXD endcap & 2537 \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{adjustbox}
-%  \end{table}
-	
-	
 	\begin{itemize}
-	\item Validations with ILCSoft in progress and promising
+	\item Comparisons with the ILCSoft in progress \& encouraging
+	\item The level of this background does not pose problem for pattern recognition
 	\end{itemize}	
 	
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Background studies for the DCH: work in progress}
+	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
 
 	\begin{columns}[t]
-		\column{0.5\textwidth}
+	\column{0.5\textwidth}
 		\begin{itemize}
-		\item Number of wires with different IDs recorded a signal
-			\begin{itemize}
-			\item Average: 3345.7 wires
-			\end{itemize}
-		\end{itemize}
+		\item Expected acceptable level of occupancy for a successful pattern recognition: $\sim5\%$ \vspace{0.2cm}
+		\item Most of the hits are due to the backscattering   \vspace{0.2cm}
+		\item The estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\
+		\textbf{\textcolor{Green}{$\Rightarrow$ Work in progress - stay tuned!}}
+		\end{itemize}	
 	
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
-	
-
-		
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Number of hits recorded per wire in the first BX
-		\item Mostly 1-hit per wire
-		\item Several hits per wire: pile-up or same 
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/DCH/nb_hits_per_wire.pdf}
-		
-	\end{columns}
+	\column{0.5\textwidth}
 	
 	\begin{itemize}
-	\item To be investigated further: merging hits belonging to the same wire and having a drift time smaller than the maximum drift time in a cell.
-	\item Occupancy as a function of the cell/voxel
-	\end{itemize}		
+	\item Vertices of backscattering particles
+	\end{itemize}
+	\centering
+
+    \begin{tikzpicture}
+      \node[anchor=south west,inner sep=0] (image) at
+      (0,0){\includegraphics[width=\textwidth]{../figures/secondaryVertices.pdf}};
+      \begin{scope}[x={(image.south east)},y={(image.north west)}]
+
+%      \draw[help lines,xstep=.1,ystep=.1] (0, 0) grid (1,1);
+%         \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+%         \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10)
+%         {0.\y}; }
+%        
+		\node[above] at (0.5, 0.95) {Boundaries of the simulation}; 
+		\draw[->, very thick](0.5, 0.95) -- (0.5, 0.8);      
+		\draw[->, very thick](0.4, 0.95) -- (0.22, 0.5); 
+		\draw[->, very thick](0.6, 0.95) -- (0.78, 0.5); 
+        
+      \end{scope}
+    \end{tikzpicture}
+	
+	%\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
+
+	\end{columns}
 	
 \end{frame}
 
@@ -628,13 +614,42 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Background studies for the DCH: number of hits per layer}
+	\frametitle{Background hits in the DCH}
 
-	
+	\begin{columns}
+	\column{0.5\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{../figures/DCH/DCH_hits_layer.pdf}
-		
-	
+       \begin{itemize}
+        \item Pattern recognition possible for occupancy levels of: \vspace{0.2cm}
+          \begin{itemize}
+          \item $20\%$ for inner-most layers
+          \item $5\%$ for outer-most layers \vspace{0.2cm}
+          \end{itemize}
+          \item Hits due to the background  \vspace{0.2cm}
+            \begin{itemize}
+            \item Loopers
+            \item Tracks in the forward region
+           \end{itemize}
+        \end{itemize}
+
+
+	\column{0.5\textwidth}	
+	\centering
+        \begin{tikzpicture}
+          \node[anchor=south west,inner sep=0] (image) at
+          (0,0){\includegraphics[width=\textwidth]{../figures/layerR_vs_phi.pdf}};
+          \begin{scope}[x={(image.south east)},y={(image.north west)}]
+
+            % \draw[help lines,xstep=.1,ystep=.1] (0, 0) grid (1,1);
+            % \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
+            % \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10)
+            % {0.\y}; }
+            % 
+            \node[above] at (0.5, 0.8) {\textcolor{red}{Work in progress}}; 
+            
+          \end{scope}
+        \end{tikzpicture}
+	\end{columns}
 	
 \end{frame}
 
@@ -645,6 +660,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 \begin{frame}
   \frametitle{Summary \& Outlook}
   
+  	\vspace{1cm}
 	\begin{itemize}
 	\item Full simulation of the FCCee-IDEA detector concept with FCCSW
 	\item Implementation of the drift chamber 
@@ -652,73 +668,70 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\item Validations done and still ongoing 
 	\item First physics studies:
 		\begin{itemize}
-		\item Impact of beam-induced backgrounds: e+e- incoherent pairs
+		\item Impact of beam-induced backgrounds: $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions
 	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
+	  	\item More investigation on the occupancy is needed for the DCH to draw final conclusions
 	  	\end{itemize}
 	\item Future work:
 		\begin{itemize}
-		\item Tracking
+		\item Implementation of a realistic material around DCH for a realistic estimate of the background
+		\item Study the effect of other beam-induced
+                  backgrouds (the synchrotron radiation \& $\gamma\gamma\rightarrow$~hadrons)
+		\item Optimisation of the geometry of the DCH
+		\item Track reconstruction in FCCSW
 		\end{itemize}
   	\end{itemize}
 
+	\vspace{1cm}
+	\centering
+	\Large{\textbf{Thank you for your attention!}}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+	\centering
+	\Huge{Backup slides}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
+
+
+
+	\begin{columns}
+	\column{0.5\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../figures/layerR_vs_wires.pdf}
+
+	\column{0.5\textwidth}	
+	\centering
+	\includegraphics[width=\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
+	
+	\end{columns}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Secondary vertices produced}
+
+
+	\centering
+	\includegraphics[width=0.7\textwidth]{../figures/SecondaryVertices_logScale.pdf}
+
+	
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}
-%  \frametitle{Number of times the same wire is hit per BX}
-%
-%  \begin{columns}
-%  	\column{0.33\textwidth}	
-%  	\begin{itemize}
-%  	\item BX 0
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX0.pdf}
-%	
-%	\column{0.33\textwidth}
-%	\begin{itemize}
-%  	\item BX 1
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX1.pdf}
-%	
-%	\column{0.33\textwidth}	
-%  	\begin{itemize}
-%  	\item BX 2
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX2.pdf}
-%  \end{columns}
-%
-%\end{frame}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}
-%  \frametitle{Material Budget: Full Detector}
-%
-%  \begin{columns}
-%  	\column{0.33\textwidth}	
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/material/depth.pdf}\\
-%	\includegraphics[width=\textwidth]{../figures/material/depthpos.pdf}
-%	
-%	\column{0.33\textwidth}	
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/material/lambda.pdf}\\
-%	\includegraphics[width=\textwidth]{../figures/material/lambdapos.pdf}
-%	
-%	\column{0.33\textwidth}	
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/material/x0.pdf}\\
-%	\includegraphics[width=\textwidth]{../figures/material/x0pos.pdf}
-%  \end{columns}
-%
-%\end{frame}
+
 %----------------------------------------------------------------------------------------
 %	End of Document
 %----------------------------------------------------------------------------------------
