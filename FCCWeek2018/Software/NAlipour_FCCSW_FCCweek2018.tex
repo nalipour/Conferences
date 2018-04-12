@@ -152,13 +152,13 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\frametitle{2 FCCee detector concepts}
 	
 		\begin{itemize}
-		\item The CLD detector concept (c.f. CLD detector model overview, Oleksandr~Viazlo)
+		\item The CLD detector concept (c.f. Oleksandr~Viazlo)
 			\begin{itemize}
 			\item An adaptation of the CLIC detector model 
 			\\ $\Rightarrow$ (Silicon-based vertex and tracking detectors)
 			\item Widely simulated with the ILCSoft
 			\end{itemize}
-		\item The IDEA detector concept $\Rightarrow$ \textcolor{Red}{focus of this talk}
+		\item The IDEA detector concept (c.f. Franco Bedeschi)
 			\begin{itemize}
 			\item Simulated using FCCSW
 			\end{itemize}
@@ -646,9 +646,10 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\begin{columns}[t]
 	\column{0.5\textwidth}
 		\begin{itemize}
+		\item Most of the hits in the DCH are due to the backscattering   \vspace{0.2cm}
 		\item Expected acceptable level of occupancy for a successful pattern recognition: $\sim5\%$ \vspace{0.2cm}
-		\item Most of the hits are due to the backscattering   \vspace{0.2cm}
-		\item The estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\
+
+		\item The current estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\ \vspace{1cm}
 		\textbf{\textcolor{Green}{$\Rightarrow$ Work in progress - stay tuned!}}
 		\end{itemize}	
 	
@@ -693,16 +694,18 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\column{0.5\textwidth}
 	\centering
        \begin{itemize}
+         \item Hits due to the background  \vspace{0.2cm}
+          \begin{itemize}
+          \item Loopers
+          \item Tracks in the forward region \vspace{1cm}
+		\end{itemize}       
+       
         \item Pattern recognition possible for occupancy levels of: \vspace{0.2cm}
           \begin{itemize}
           \item $20\%$ for inner-most layers
           \item $5\%$ for outer-most layers \vspace{0.2cm}
           \end{itemize}
-          \item Hits due to the background  \vspace{0.2cm}
-            \begin{itemize}
-            \item Loopers
-            \item Tracks in the forward region
-           \end{itemize}
+
         \end{itemize}
 
 
@@ -773,7 +776,6 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
-
 
 
 	\begin{columns}
