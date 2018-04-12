@@ -365,32 +365,27 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 \begin{frame}
   \frametitle{2. Segmentation Strategy for DCH (1)}
 
-
-    \begin{itemize}
-    \item Large number of wires $\Rightarrow$ requires a fast way to find the
+	\vspace{1cm}
+	
+	\begin{columns}[t]
+	\column{0.5\textwidth}
+	\begin{itemize}
+    \item Large number of wires $\Rightarrow$ fast way to find the
       location of the closest wire hit
-    \item Compute the azimuth angle of the hit $\phi$ for $(x_{hit},
-      y_{hit})$ 
-      \begin{itemize}
-      \item (like if the wires were parallel to the z-axis).
-      \end{itemize}
-
-    \begin{equation}
-      \phi = \arctan(y_{hit}/x_{hit})
-    \end{equation}
-
-    \item The angle between the hit position and the wire detecting it
-      is calculated:
-
-    \begin{equation}
-      \alpha = 2 \arcsin({{z_{hit} tan(\epsilon)} \over {2R}})
-    \end{equation}
-  \item Total hit azimuthal angle: $\phi+\alpha$
+    \item Projection of the hit positions into the x-y plane
+    \item Consider the z axis to compensate for the stereo angle of the wires
     \end{itemize}
-
-
+    
+    \column{0.5\textwidth}
+	\centering
+	\begin{itemize}
+	\item Example: MEG II DCH
+	\end{itemize}
+	\includegraphics[width=0.7\textwidth]{../figures/MEGDCH.png}
+    \end{columns}
+	
+	\vspace{-0.5cm}
     \begin{columns}
-      \column{0.33\textwidth}
       \column{0.33\textwidth}
       \begin{tikzpicture}[scale=0.5]
 
@@ -454,6 +449,9 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
         % (segz) [right] {z segmentation (w)};
       \end{scope}
     \end{tikzpicture}
+
+    \column{0.33\textwidth}
+
     \end{columns}
 
 
@@ -469,7 +467,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 		\column{0.5\textwidth}
 		\begin{itemize}
 		\item Information on the location of the sensitive wires \vspace{0.2cm}
-		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}ß
+		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}
 		\item Different granularity for different layers in the DCH \vspace{0.2cm}
 		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
 			$\Rightarrow$ Accessible in every step of the simulation
@@ -550,7 +548,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Number of sensitive layers vs. $\theta$}
+	\frametitle{Coverage of the vertex detector \& the drift chamber}
 	
 	\begin{itemize}
 		\item Number of layers hit by 100~GeV $\mu-$ 
@@ -647,6 +645,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\column{0.5\textwidth}
 		\begin{itemize}
 		\item Most of the hits in the DCH are due to the backscattering   \vspace{0.2cm}
+		\item Current simulations show a background level of $\sim3.5\%$ \vspace{0.2cm}
 		\item Expected acceptable level of occupancy for a successful pattern recognition: $\sim5\%$ \vspace{0.2cm}
 
 		\item The current estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\ \vspace{1cm}
@@ -747,7 +746,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 		\item Impact of beam-induced backgrounds: $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions
 	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
 	  	\item More investigation on the occupancy is needed for the DCH to draw final conclusions
-	  	\end{itemize}
+	  	\end{itemize} \vspace{0.2cm}
 	\item Future work:
 		\begin{itemize}
 		\item Implementation of a realistic material around DCH 
@@ -757,7 +756,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 		\end{itemize}
   	\end{itemize}
 
-	\vspace{1cm}
+	\vspace{0.5cm}
 	\centering
 	\Large{\textbf{Thank you for your attention!}}
 \end{frame}
@@ -775,8 +774,11 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
+	\frametitle{Impact of incoherent pairs in the DCH}
 
+	\begin{itemize}
+	\item Number of wires hit as a function of the layer radius
+	\end{itemize}
 
 	\begin{columns}
 	\column{0.5\textwidth}
