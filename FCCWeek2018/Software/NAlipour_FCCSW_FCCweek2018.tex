@@ -198,8 +198,8 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\column{0.5\textwidth}
 	
 	\begin{itemize}
+	\item \href{https://indico.cern.ch/event/656491/contributions/2939121/attachments/1629781/2597342/IDEA-CDCH_FCCweek18.pdf}{Talk by Giovanni Tassielli}
 	\item Track reconstruction \& particle ID
-	\item Layers divided into cells rotated with a certain stereo angle
 	\end{itemize}
 
 
@@ -233,7 +233,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\begin{itemize}
 	\item Field wires: provide a uniform electric field
 	\item Sensitive wires: record signal
-	\item Field to sense wire ratio: 5:1
+	\item Field to sensitive wire ratio: 5:1
 	\end{itemize}
 	
 	
@@ -244,43 +244,59 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}
+%	\frametitle{FCCSW simulation chain}
+%	
+%	\begin{enumerate}
+%	\item Detector geometry description with DD4hep
+%		\begin{itemize}
+%		\item Collaborative effort with CLIC, ILC and LHCb
+%		\item The IR region and the VXD from CLD are as well implemented in DD4hep
+%		\item Definition of the gas layers in the DCH 
+%		\end{itemize}
+%	\item Segmentation of the sensitive areas:
+%		\begin{itemize}
+%		\item Information on the position of the sense wires instead of placing physical volumes
+%		\item Speed up the simulation
+%		\end{itemize}
+%	\item Geant4 simulation:
+%		\begin{itemize}
+%		\item Calculate the E\textsubscript{dep} for each ionisation action
+%		\item Charge drift to the wires
+%		\end{itemize}
+%	\item Hit reconstruction:
+%		\begin{itemize}
+%		\item Combination of individual hit calculations from (3)
+%		\item Calculation of the signal in the wire
+%		\end{itemize}
+%	\end{enumerate}		
+%	
+%        \centering
+%	\smartdiagramset{back arrow disabled=true}
+%  	\smartdiagram[flow diagram:horizontal]
+%  	{%
+%    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+%  	}
+%
+%\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{FCCSW simulation chain}
 	
-	\begin{enumerate}
-	\item Detector geometry description with DD4hep
-		\begin{itemize}
-		\item Collaborative effort with CLIC, ILC and LHCb
-		\item The IR region and the VXD from CLD are as well implemented in DD4hep
-		\item Definition of the gas layers in the DCH 
-		\end{itemize}
-	\item Segmentation of the sensitive areas:
-		\begin{itemize}
-		\item Information on the position of the sense wires instead of placing physical volumes
-		\item Speed up the simulation
-		\end{itemize}
-	\item Geant4 simulation:
-		\begin{itemize}
-		\item Calculate the E\textsubscript{dep} for each ionisation action
-		\item Charge drift to the wires
-		\end{itemize}
-	\item Hit reconstruction:
-		\begin{itemize}
-		\item Combination of individual hit calculations from (3)
-		\item Calculation of the signal in the wire
-		\end{itemize}
-	\end{enumerate}		
-	
-        \centering
+    \centering
 	\smartdiagramset{back arrow disabled=true}
+	\usebeamercolor{background canvas}
   	\smartdiagram[flow diagram:horizontal]
   	{%
     	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
   	}
-  	
+
 
 \end{frame}
 
@@ -288,12 +304,31 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{1. Geometry}
+	\frametitle{FCCSW simulation chain}
+	
+    \centering
+	\smartdiagramset{back arrow disabled=true}
+	\usebeamercolor{background canvas}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
+
+	\vspace{1cm}
+	\centering
+	\Huge{1. Geometry description}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{1. Geometry description}
 	
 	\begin{itemize}
-	\item Beam-pipe and interaction region (IR) taken from the CLD concept.
-	\item Vertex detector also taken from the CLD concept.
-	\item The drift chamber implemented from scratch in FCCSW.
+	\item Same interaction region (beampipe \& instrumentation, VXD) as the CLD concept
+	\item New implementation: drift chamber $\Rightarrow$ only the gas volume is placed
 	\end{itemize}
 	
 	\begin{block}{Visualisation with FCCSW}
@@ -304,7 +339,25 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{FCCSW simulation chain}
+	
+    \centering
+	\smartdiagramset{back arrow disabled=true}
+	\usebeamercolor{background canvas}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
 
+	\vspace{1cm}
+	\centering
+	\Huge{2. Segmentation}
+	
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -438,6 +491,26 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
+	\frametitle{FCCSW simulation chain}
+	
+    \centering
+	\smartdiagramset{back arrow disabled=true}
+	\usebeamercolor{background canvas}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
+
+	\vspace{1cm}
+	\centering
+	\Huge{3. Geant4 hit simulation \& reconstruction}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
 	\frametitle{3. Hit simulation and reconstruction of the DCH}
 
 	\begin{block}{Hit Simulation}
@@ -517,7 +590,7 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	\column{0.4\textwidth}
 	\begin{itemize}
 	\item The effect of $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions (dominated by beamstrahlung photons)
-	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
+	\item Pairs generated using the GuineaPig software (c.f. Georgios Voutsinas)
 	\item E\textsubscript{cm} = 365~GeV
 	\item Total nb. of particles: $\sim6200$ / BX
         \item A fortiori, no tracks reach the DCH wires\vspace{0.2cm}
@@ -674,10 +747,9 @@ Simulation of the drift chamber for the FCCee-IDEA detector concept within FCCSW
 	  	\end{itemize}
 	\item Future work:
 		\begin{itemize}
-		\item Implementation of a realistic material around DCH for a realistic estimate of the background
+		\item Implementation of a realistic material around DCH 
 		\item Study the effect of other beam-induced
                   backgrouds (the synchrotron radiation \& $\gamma\gamma\rightarrow$~hadrons)
-		\item Optimisation of the geometry of the DCH
 		\item Track reconstruction in FCCSW
 		\end{itemize}
   	\end{itemize}
