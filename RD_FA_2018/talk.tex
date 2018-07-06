@@ -64,9 +64,9 @@
   \vspace{0.3cm} }
 
 \institute[CERN]{}
-\date[5 July 2018]{RD-FA Collaboration Meeting\\ \vspace{0.3cm}
+\date[6 July 2018]{RD-FA Collaboration Meeting\\ \vspace{0.3cm}
   \scriptsize{CERN \\
-5 July 2018}}
+6 July 2018}}
 
 
 \setbeamertemplate{navigation symbols}{}
@@ -148,19 +148,8 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{FCCSW simulation chain}
+	\frametitle{FCCSW}
 
-  \vspace{0.5cm}
-
-  \centering
-	\smartdiagramset{back arrow disabled=true}
-	\usebeamercolor{background canvas}
-  	\smartdiagram[flow diagram:horizontal]
-  	{%
-    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
-  	}
-
-    \vspace{1cm}
     \begin{itemize}
       \item Webpage and tutorials: \url{http://fccsw.web.cern.ch/fccsw}
       \item GitHub link for the code: \url{https://github.com/HEP-FCC/FCCSW}
@@ -175,7 +164,7 @@
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{The interaction region as implemented in FCCSW}
+	\frametitle{The IDEA interaction region in FCCSW}
 
 	\begin{itemize}
 	\item Beam-pipe, beam instrumentations and the vertex detector are taken from the CLD concept
@@ -197,6 +186,40 @@
 
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{FCCSW simulation chain}
+
+	\begin{enumerate}
+	\item Detector geometry description with DD4hep \vspace{0.2cm}
+	\item Segmentation of the sensitive areas: \vspace{0.2cm}
+		\begin{itemize}
+    \item Speed up the simulation
+		\item Example: information on the position of the sense wires instead of placing physical volumes \vspace{0.2cm}
+		\end{itemize}
+	\item Geant4 simulation: \vspace{0.2cm}
+		\begin{itemize}
+		\item Calculate the E\textsubscript{dep} in sensitive volumes \vspace{0.2cm}
+		\end{itemize}
+	\item Hit reconstruction: \vspace{0.2cm}
+		\begin{itemize}
+		\item Combination of individual hit calculations from (3)
+		\item Calculation of the drift, diffusion and signal in the wire \vspace{0.2cm}
+		\end{itemize}
+	\end{enumerate}
+
+  \vspace{0.5cm}
+	\centering
+	\smartdiagramset{back arrow disabled=true}
+  	\smartdiagram[flow diagram:horizontal]
+  	{%
+    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
+  	}
+
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
@@ -275,8 +298,18 @@
 
   \begin{itemize}
     \item Incoherent $e^+e^-$ pairs
+      \begin{itemize}
+        \item Produced in $\gamma\gamma$ interactions from beamstrahlung
+        \item Forward region \vspace{0.2cm}
+      \end{itemize}
     \item $\gamma\gamma\rightarrow$ hadrons
+      \begin{itemize}
+        \item Possibly results in jets in the detector \vspace{0.2cm}
+      \end{itemize}
     \item Synchrotron radiation (SR)
+      \begin{itemize}
+        \item Photons from the last bending magnet
+      \end{itemize}
   \end{itemize}
 
 \end{frame}
@@ -345,7 +378,7 @@
   \end{columns}
 
   \begin{itemize}
-    \item Very small effect $\Rightarrow$ no problem for tracking
+    \item Negligible effect
   \end{itemize}
 
 \end{frame}
@@ -359,6 +392,7 @@
   \begin{itemize}
     \item The shielding stops most of the SR photons.
     \item Average occupancy: 0.2\%
+    \item Negligible effect
   \end{itemize}
   \centering
   \includegraphics[width=0.5\textwidth]{./figures/SR_SL.pdf}
@@ -371,10 +405,18 @@
 \begin{frame}
 	\frametitle{Summary: background occupancy in DCH}
 
+  \begin{itemize}
+    \item The overall effect of the backgrounds on the DCH remains small
+    \item $e^+e^-$ pair background is the largest source of background
+  \end{itemize}
+
+  \vspace{0.5cm}
+
   \centering
   \begin{tabular}{l c c}
     \toprule
-    Background & E\textsubscript{cm} = 91.2~GeV &  E\textsubscript{cm} = 365~GeV \\
+    Background & \multicolumn{2}{c}{Average occupancy} \\
+     & E\textsubscript{cm} = 91.2~GeV &  E\textsubscript{cm} = 365~GeV \\
     \midrule
     $e^+e^-$ pair background & 1.1\% & 2.9\% \\
     $\gamma\gamma\rightarrow$hadrons & 0.001\% & 0.035\%  \\
@@ -391,14 +433,18 @@
 	\frametitle{Conclusions}
 
   \begin{itemize}
-    \item The FCCSW is ready for the full simulation of the IDEA detector
+    \item The FCCSW is ready for the full simulation of the IDEA detector \vspace{0.5cm}
     \item Background estimations in full simulations have been performed for the drift chamber
     \begin{itemize}
       \item Low effect
-    \end{itemize}
-    \item Contributions for the implementation of other detectors are more than welcome \\ $\Rightarrow$ Dual-readout calorimeter
+    \end{itemize} \vspace{0.5cm}
+    \item Contributions are more than welcome \\
+    $\Rightarrow$ Input for tracking \\
+    $\Rightarrow$ Dual-readout calorimeter, ...
   \end{itemize}
 
+  \vspace{1cm}
+  \Huge{Thank you for your attention!}
 \end{frame}
 
 
