@@ -28,7 +28,7 @@
 \usetikzlibrary{shapes,arrows, decorations.pathreplacing} %nilou
 \usetikzlibrary{decorations.markings} %nilou
 \usetikzlibrary{trees}%nilou
-\usetikzlibrary{decorations.pathmorphing}%nilou 
+\usetikzlibrary{decorations.pathmorphing}%nilou
 \usepackage{siunitx}%nilou
 \usepackage{framed}%nilou
 \usetikzlibrary{backgrounds} %nilou
@@ -59,16 +59,14 @@
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-\title[]{Beam-background impact in the IDEA drift chamber}
+\title[]{MDI and background studies with IDEA tracker}
 \author[Niloufar Alipour Tehrani]{Niloufar Alipour Tehrani \\
-on behalf of FCCee MDI group
-  }
+on behalf of FCCee MDI group}
 
-\institute[CERN]{} 
-\date[10 April 2018]{FCC-ee physics \& experiments: \vspace{0.2cm}
-	\\ Machine detector interface (review)\\ \vspace{0.5cm}
-  \scriptsize{FCC Week 2018 \\ Amsterdam, the Netherlands \\ \vspace{0.3cm}
-10 April 2018}}
+\institute[CERN]{}
+\date[10 April 2018]{Experiments: Simulation and reconstruction \\    \vspace{0.5cm}
+  FCCee Workshop 2019 \\ CERN \\ \vspace{0.3cm}
+  10 January 2019}
 
 
 \setbeamertemplate{navigation symbols}{}
@@ -78,7 +76,7 @@ on behalf of FCCee MDI group
 \usecolortheme{default}
 
 \setlength{\leftmargini}{2pt} % nalipour: left margin indentation
-\renewcommand{\inserttotalframenumber}{\ref{lastframe}} 
+\renewcommand{\inserttotalframenumber}{\ref{lastframe}}
 \begin{document}
 \renewcommand{\inserttotalframenumber}{\pageref{lastslide}}
 
@@ -91,7 +89,7 @@ on behalf of FCCee MDI group
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[plain]
-  
+
   \vspace{1cm}
   \titlepage
 
@@ -114,40 +112,84 @@ on behalf of FCCee MDI group
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Introduction}
-	
 
-        \begin{columns}
-          \column{0.7\textwidth}
-          \begin{block}{FCCSW: FCC Software}
-            \begin{itemize}
-            \item Common software for all FCC experiments
-              \begin{itemize}
-              \item ee, hh \& eh
-              \end{itemize}
-            \item Detector and physics studies
-              \begin{itemize}
-              \item Fast \& full simulations
-              \item One software stack from event generation to physics analysis
-              \end{itemize}
-            \item Collaborative approach
-            \end{itemize}
-          \end{block}
 
-          \begin{block}{FCCee-IDEA \& FCCSW}
-            \begin{itemize}
-            \item A first example of implementation of the IDEA
-              detector in FCCSW
-            \item Validation of the detector
-            \item Study of the impact of beam-background in the IDEA
-              drift chamber 
-            \end{itemize}
-          \end{block}
+  \begin{itemize}
+  \item The current status of the simulation of the IDEA
+    detector with FCCSW
+  \item Validation of the detector
+  \item Study of the impact of beam-background on the IDEA
+    drift chamber
+  \item Few investigations for the tracking
+  \end{itemize}
 
-	\column{0.3\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/cernFCC}
-	\end{columns}
-	
+    \begin{block}{FCCSW: FCC Software}
+      \begin{itemize}
+      \item Common software for all FCC experiments
+        \begin{itemize}
+        \item ee, hh \& eh
+        \end{itemize}
+      \item Detector and physics studies
+        \begin{itemize}
+        \item Fast \& full simulations
+        \item One software stack from event generation to physics analysis
+        \end{itemize}
+      \item Collaborative approach
+      \end{itemize}
+    \end{block}
+
+%
+% \column{0.3\textwidth}
+% \centering
+% \includegraphics[width=\textwidth]{../figures/cernFCC}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{The IDEA detector concept for FCC-ee}
+
+  \begin{itemize}
+    \item The IDEA detector is one of the two detector concepts for the FCC-ee
+  \end{itemize}
+
+  \begin{columns}
+    \column{0.5\textwidth}
+      \begin{itemize}
+        \item Main features of the IDEA concept
+          \begin{itemize}
+            \item Vertex detector: MAPS
+            \item Ultra-light drift chamber with particle identification
+            \item Dual-readout calorimetry
+            \item Aditional silicon disk layers placed in the space between the drift chamber and the dual readout calorimeter to serve as a precise tracking layer and a pre showering device
+            \item 2~T axial magnetic field
+            \item Instrumented return yoke
+          \end{itemize}
+      \end{itemize}
+
+    \column{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/FCCeeIDEAConcept}
+
+  \end{columns}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Give it a try!}
+
+  \url{https://github.com/HEP-FCC/FCCSW}
+
+  \centering
+  \includegraphics[width=\textwidth]{figures/IDEAweb}
 
 \end{frame}
 
@@ -155,40 +197,32 @@ on behalf of FCCee MDI group
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{2 FCCee detector concepts}
-	
-		\begin{itemize}
-		\item The CLD detector concept (c.f. CLD detector model overview, Oleksandr~Viazlo)
-			\begin{itemize}
-			\item An adaptation of the CLIC detector model 
-			\\ $\Rightarrow$ (Silicon-based vertex and tracking detectors)
-			\item Widely simulated with the ILCSoft
-			\end{itemize}
-		\item The IDEA detector concept $\Rightarrow$ \textcolor{Red}{focus of this talk}
-		\end{itemize}
+  \frametitle{The IDEA detector as visualized with FCCSW}
 
-	
-	\vspace{-1.5cm}
-	\begin{columns}
-	\column{0.5\textwidth}
-	
-	\begin{block}{IDEA: Ultimate Goal}
-	\begin{itemize}
-	\item Vertex detector: MAPS
-	\item Ultra-light drift chamber with PID (DCH)
-	\item Double read-out calorimetry (DR)
-        \item Additional disk layers to be placed in the space between DCH and DR 
-	\item 2~T solenoidal magnetic field
-	\item Instrumented return yoke
-	\item Surrounded by large tracking volume (R$\sim$8~m) for very weakly coupled (long-lived) particles
-	\end{itemize}
-	\end{block}
-	
-	\vspace{-2cm}
-	\column{0.5\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/FCCeeIDEAConcept.png}
-	\end{columns}
+  \centering
+  \begin{tikzpicture}
+    \node[anchor=south west,inner sep=0] (image) at
+    (0,0){\includegraphics[width=0.9\textwidth]{figures/FCCeeIDEA_IR}};
+    \begin{scope}[x={(image.south east)},y={(image.north west)}]
+    \node[left] at (0.6, 0.7) {\textbf{Drift Chamber}};
+
+    \draw[->, thick](0.05, 0.25) -- (0.05, 0.1);
+    \node[above] at (0.05, 0.25) {\textbf{Beam Pipe}};
+
+    \draw[->, thick](0.15, 0.45) -- (0.15, 0.22);
+    \node[above] at (0.15, 0.45) {\textbf{Solenoid Shielding}};
+
+    \draw[->, thick](0.2, 0.7) -- (0.42, 0.4);
+    \node[above] at (0.2, 0.7) {\textbf{Tungsten Shielding}};
+
+    \draw[->, thick](0.55, 0.05) -- (0.48, 0.4);
+    \node[below] at (0.55, 0.05) {\textbf{Luminosity Calorimeter}};
+
+    \draw[->, thick](0.75, 0.2) -- (0.58, 0.5);
+    \node[below] at (0.75, 0.2) {\textbf{Vertex Detector}};
+
+  \end{scope}
+  \end{tikzpicture}
 
 \end{frame}
 
@@ -196,76 +230,45 @@ on behalf of FCCee MDI group
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{IDEA Drift Chamber (DCH)}
-	
-	\begin{columns}	
-	\column{0.5\textwidth}
-	
-	\begin{itemize}
-	\item Track reconstruction \& particle ID
-	\item Layers divided into cells rotated with a certain stereo angle
-	\end{itemize}
+  \frametitle{The IDEA drift chamber}
 
+  \begin{columns}
+  \column{0.6\textwidth}
+    \begin{itemize}
+      \item The parameters of the drift chamber \vspace{0.5cm}
+    \end{itemize}
 
-	\begin{block}{Parameters}
-  	\begin{table}
-    	\begin{adjustbox}{max width=\textwidth}
-    	  \begin{tabular}{l l}
-    	    \toprule
-        % & Dimensions    \\
-        % \hline
-        Length & 4500 mm \\ 
-        Inner radius & 345 mm \\
-        Outer radius & 2000 mm\\
-        Nb. layers & 112 \\
-        Cell size & 12 mm to 14.7~mm\\
-        Total nb. of sensitive wires & 56448 \\
-        Total nb. of field wires & 282240 \\
-        Total nb. of wires & 338688 \\
-        Gas & GasHe\_90Isob\_10 \\
-        Wire material & Aluminum \\
-        Single cell resolution & 0.1 mm \\
+    \centering
+    \begin{adjustbox}{max width=1\textwidth}
+      \begin{tabular}{l l}
+        \toprule
+          Gas & $90~\%$ Helium \&\\
+          & $10~\%$ isobutane ($\text{C}_{4}\text{H}_{10}$) \\
+          Length & 4~m \\
+          Inner radius & 0.345~m \\
+          Outer radius & 2~m\\
+          Nb. layer & 112 \\
+          Cell size & 12~mm - 14.7~mm \\
+          Number of sensitive wires & 56'448 \\
+          Transverse resolution & 0.1~mm \\
+          Longitudinal resolution & 1~mm \\
         \bottomrule
       \end{tabular}
-    	\end{adjustbox}
-  	\end{table}
-	\end{block}
+    \end{adjustbox}
 
+  \column{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/Field_sensWires.png}
 
-	\column{0.5\textwidth}
-	
-	\begin{itemize}
-	\item Field wires: provide a uniform electric field
-	\item Sensitive wires: record signal
-	\item Field to sense wire ratio: 5:1
-	\end{itemize}
-	
-	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/DriftChamber.png}
-	\end{columns}
-	
-\end{frame}
+  \end{columns}
 
+  \begin{itemize}
+    % \item The gas volume is divided into a set of hyperboloid layers.
+    % \item Each layer contains single sense wire cells.
+    \item Field wires surround the sense wires to provide homogeneous electric field for each cell.
+    \item The wires are rotated with an average stereo angle of 0.1~radians to improve the longitudinal resolution along them.
+  \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{The interaction region as implemented in FCCSW}
-	
-	\begin{itemize}
-	\item Beam-pipe, beam instrumentations and the vertex detector are taken from the CLD concept
-		\begin{itemize}
-		\item Temporary design of VXD for the IDEA detector $\Rightarrow $ ultimate goal: MAPS
-		\end{itemize}
-	\item The DCH implemented from scratch in FCCSW
-	\end{itemize}
-	
-	\begin{block}{Visualisation with FCCSW}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/FCCeeIDEA_IR_description_zoomVXD.png}
-	\end{block}
 
 \end{frame}
 
@@ -274,408 +277,320 @@ on behalf of FCCee MDI group
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{CLD vs. IDEA interaction region}
+  \frametitle{The simulation chain in FCCSW}
 
-	\begin{itemize}
-	\item Both detectors have comparable coverage
-	\item Difference in the tracking regions:
-		\begin{itemize}
-		\item Number of layers
-		\item Material budget (and type)
-		\item CLD tracker separated in the endcap and the barrel regions
-		\end{itemize}
-	\end{itemize}
-	
-		\centering
-	\begin{tabular}{l|l|l}
-	Parameters & FCCee (CLD) & FCCee (IDEA) \\ \hline
-	VXD Barrel r\textsubscript{in} & \textcolor{Green}{17 mm} & \textcolor{Green}{17 mm} \\
-	VXD Barrel r\textsubscript{out} & 59 mm & 59 mm \\
-	VXD Barrel length & 250 mm & 250 mm \\
-	VXD Endcap r\textsubscript{in} & 24 - 45 mm & 24 - 45 mm \\
-	VXD Endcap r\textsubscript{out} & 102 mm & 102 mm \\
-	VXD Endcap z\textsubscript{position} & 159-301 mm & 159-301 mm \\
-	Tracker r\textsubscript{in} & \textcolor{Green}{127 mm} & \textcolor{Green}{345 mm} \\
-	Tracker r\textsubscript{out} & \textcolor{Green}{2100 mm} & \textcolor{Green}{2000 mm} \\
-	Tracker length & \textcolor{Green}{4720 mm} & \textcolor{Green}{4500 mm} \\
-	\end{tabular}
+  \begin{enumerate}
+  	\item Detector geometry description with DD4hep
+  		\begin{itemize}
+  		\item Collaborative effort with CLIC, ILC and LHCb
+  		\item The IR region and the VXD from CLD are as well implemented in DD4hep
+  		\item Definition of the gas layers in the DCH (with hyperboloid volumes)
+  		\end{itemize}
+  	\item Segmentation of the sensitive areas
+  		\begin{itemize}
+  		\item Information on the position of the sense wires instead of placing physical volumes
+  		\item Speeds up the simulation
+  		\end{itemize}
+  	\item Geant4 simulation
+  		\begin{itemize}
+  		\item Calculate the E\textsubscript{dep} for each ionisation action
+  		\item Charge drift to the wires
+  		\end{itemize}
+  	\item Hit reconstruction
+  		\begin{itemize}
+  		\item Combination of individual hit calculations from (3)
+  		\item Calculation of the signal in the wire
+  		\end{itemize}
+    \item Track reconstruction with ACTS \textcolor{Green}{$\Rightarrow$ under investigation}
+	\end{enumerate}
 
-\end{frame}
+  \centering
+  \smartdiagramset{back arrow disabled=true}
+  \usebeamercolor{background canvas}
+    \smartdiagram[flow diagram:horizontal]
+    {%
+      {Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction, Tracking%
+    }
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{FCCSW simulation chain}
-	
-	\begin{enumerate}
-	\item Detector geometry description with DD4hep
-		\begin{itemize}
-		\item Collaborative effort with CLIC, ILC and LHCb
-		\item The IR region and the VXD from CLD are as well implemented in DD4hep
-		\item Definition of the gas layers in the DCH 
-		\end{itemize}
-	\item Segmentation of the sensitive areas:
-		\begin{itemize}
-		\item Information on the position of the sense wires instead of placing physical volumes
-		\item Speed up the simulation
-		\end{itemize}
-	\item Geant4 simulation:
-		\begin{itemize}
-		\item Calculate the E\textsubscript{dep} for each ionisation action
-		\item Charge drift to the wires
-		\end{itemize}
-	\item Hit reconstruction:
-		\begin{itemize}
-		\item Combination of individual hit calculations from (3)
-		\item Calculation of the signal in the wire
-		\end{itemize}
-	\end{enumerate}		
-	
-	\centering
-	\smartdiagramset{back arrow disabled=true}
-  	\smartdiagram[flow diagram:horizontal]
-  	{%
-    	{Geometry\\DDhep}, Segmentation, {Geant4 \\simulation}, Hit Reconstruction%
-  	}
-  	
-
-\end{frame}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Segmentation of the DCH}
-		
-	\begin{columns}[t]
-		\column{0.5\textwidth}
-		\begin{itemize}
-		\item Information on the location of the sensitive wires \vspace{0.2cm}
-		\item Associates a unique wire ID (cellID) to the wires \vspace{0.2cm}
-		\item Different granularity for different layers in the DCH \vspace{0.2cm}
-		\item The segmentation information is created while building geometry \vspace{0.2cm} \\
-			$\Rightarrow$ Accessible in every step of the simulation
-		\end{itemize}
-	
-		\column{0.5\textwidth}	
-		\begin{itemize}
-		\item First layer of the DCH
-		\item Hits having the same wire ID are shown by the same color
-		\item Validates the segmentation
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/allHits}
-	\end{columns}
-	
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-	\frametitle{Hit simulation and reconstruction of the DCH}
-	
-	\begin{block}{Hit Simulation}
-	\begin{itemize}
-	\item Geant4: Stepping in the gas with a G4Step length of 2~mm 
-	\item Reject ionisation acts with:
-		\begin{itemize}
-		\item E\textsubscript{dep}$<$~10~eV
-		\item \texttt{G4Step} length~$<~5\mu$m
-		\end{itemize} 
-	
-	\item Drift the charge deposition to the nearest wire 
-		\begin{itemize}
-		\item Compute the distance of the closest approach
-		\item Calculate the drift time assuming a constant drift velocity of 2~cm/$\mu$s
-		\item Calculate the total time of the hit \\
-		\begin{equation}
-	      t_{hit} = t_{drift}+t_{\text{signal}}+t_{\text{particle flight}}
-    		\end{equation}
-		\end{itemize} 
-	\end{itemize}
-	\end{block}
-		
-	\begin{block}{Reconstruction}
-		\begin{itemize}
-		\item \textcolor{Red}{Hit}: regroup the E\textsubscript{dep} with a drift time smaller than the maximum drift time in the cell
-		\end{itemize}
-	\end{block}
-
-	
-	
-\end{frame}
+  \frametitle{The simulation of the drift chamber using FCCSW}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Number of sensitive layers vs. $\theta$}
-	
-	\begin{itemize}
-		\item Number of layers hit by 100~GeV $\mu-$ 
-		\begin{itemize}
-
-		\item $\theta=0^{\circ}$: in the forward direction
-		\item $\theta=90^{\circ}$: in the barrel
-		\item Averaged over $\phi$	
-		\end{itemize}
-	\end{itemize}
-		
-	\begin{columns}	
-		\column{0.5\textwidth}	
-		\begin{block}{VXD}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/theta_nbHits_VXD.pdf}
-		\end{block}
-	
-		\column{0.5\textwidth}	
-		\begin{block}{DCH}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/theta_nbHits_DCH.pdf} 	
-		\end{block}
-	\end{columns}
-	
-	
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Impact of the beam background on the interaction region (IR)}
-
-	\begin{columns}
-	\column{0.7\textwidth}
-	\begin{itemize}
-	\item The effect of $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions (dominated by beamstrahlung photons)
-	\item Pairs generated using GuineaPig (c.f. Georgios Voutsinas)
-	\item E\textsubscript{cm} = 365~GeV
-	\item Total nb. of particles: $\sim6200$
-	\end{itemize}		
-	\column{0.3\textwidth}
-        \vspace{0.2cm}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pT.pdf} 
-	\end{columns}	
-	
-	\begin{block}{Momentum distribution}
-	\begin{columns}
-	\column{0.33\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_px.pdf} \\									
-	\column{0.33\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_py.pdf}
-		 
-	\column{0.33\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/incoherentPairs_pz.pdf} 
-		\end{columns}	
-	\end{block}
-	
-%	\begin{table}
-%    \begin{adjustbox}{max width=\textwidth}
-%      \begin{tabular}{l c}
-%        \toprule
-%        Events & Average number per BX \\
-%        \hline
-%        Total particles & 6160 \\
-%        Hits in the VXD barrel & 2737 \\
-%        Hits in the VXD endcap & 2537 \\
-%        Hits in the DCH & 3345.7 \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{adjustbox}
-%  \end{table}
-	
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Pair particles in the detector}
-	
-	\begin{columns}
-	\column{0.3\textwidth}
-	\begin{itemize}
-	\item Pair particles production in 1 BX \vspace{0.2cm}
-	\item The detector parts are highlighted \vspace{0.2cm}
-	\item A fortiori, no tracks reach the DCH wires\vspace{0.2cm}
-	\end{itemize}
-	
-	\column{0.7\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/pairs_R_Z_legend.pdf}
-		
-	\end{columns}
-	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Impact of incoherent pairs in the VXD}
-
-	\begin{itemize}
-	\item The number of hits is averaged over 30 BX
-	\end{itemize}	
-	
-	
-	\begin{columns}
-	\column{0.5\textwidth}
-		\begin{itemize}
-		\item Vertex Barrel
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_barrel.pdf}
-		
-	\column{0.5\textwidth}
-		\begin{itemize}
-		\item Vertex Endcap
-		\end{itemize}
-		\centering
-		\includegraphics[width=\textwidth]{../figures/occupancy_VXD_endcap.pdf}
-	\end{columns}
-	
-%	\begin{table}
-%    \begin{adjustbox}{max width=\textwidth}
-%      \begin{tabular}{l c}
-%        \toprule
-%        Detector & Total nb. of hits \\
-%        \hline
-%        Hits in the VXD barrel & 2737 \\
-%        Hits in the VXD endcap & 2537 \\
-%        \bottomrule
-%      \end{tabular}
-%    \end{adjustbox}
-%  \end{table}
-	
-	
-	\begin{itemize}
-	\item Comparisons with the ILCSoft in progress \& encouraging
-	\item The level of this background does not pose problem for pattern recognition
-	\end{itemize}	
-	
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
-
-	\begin{columns}[t]
-	\column{0.5\textwidth}
-		\begin{itemize}
-		%\item Only few tracks of the incoherent pairs are expected to enter the DCH \vspace{0.2cm}
-		\item On average $\sim2000$ wires (over 56448) per BX are hit in the DCH ($\sim3.5\%$ of occupancy) \vspace{0.2cm}
-		\item Expected acceptable level of occupancy for a successful pattern recognition: $\sim5\%$ \vspace{0.2cm}
-		\item Most of the hits are due to the backscattering   \vspace{0.2cm}
-		\item The estimation of the occupancy is pessimistic due to unclear behaviour of \textsc{Geant4} at the boundary conditions and the lack of calorimeter, magnet and yoke around the DCH in the simulation \\
-		\textbf{\textcolor{Green}{$\Rightarrow$ Work in progress - stay tuned!}}
-		\end{itemize}	
-	
-	\column{0.5\textwidth}
-	
-	\begin{itemize}
-	\item Vertices of backscattering particles
-	\end{itemize}
-	\centering
-
-    \begin{tikzpicture}
-      \node[anchor=south west,inner sep=0] (image) at
-      (0,0){\includegraphics[width=\textwidth]{../figures/secondaryVertices.pdf}};
-      \begin{scope}[x={(image.south east)},y={(image.north west)}]
-
-%      \draw[help lines,xstep=.1,ystep=.1] (0, 0) grid (1,1);
-%         \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-%         \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10)
-%         {0.\y}; }
-%        
-		\node[above] at (0.5, 0.95) {Boundaries of the simulation}; 
-		\draw[->, very thick](0.5, 0.95) -- (0.5, 0.8);      
-		\draw[->, very thick](0.4, 0.95) -- (0.22, 0.5); 
-		\draw[->, very thick](0.6, 0.95) -- (0.78, 0.5); 
-        
-      \end{scope}
-    \end{tikzpicture}
-	
-	%\includegraphics[width=\textwidth]{../figures/DCH/differentWires_hit_perBX.pdf}
-
-	\end{columns}
-	
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH: occupancy
-          for one BX}
-
+  \begin{columns}
+  \column{0.5\textwidth}
+    \begin{itemize}
+      \item The sensitive wires as simulated in the first layer of the drift chamber with FCCSW.
+      \item The DD4hep segmentation (\textsc{DDSegmentation}) is responsible to associate a hit to the wire it drifts to
         \begin{itemize}
-        \item Pattern recognition possible for occupancy levels of:
-          \begin{itemize}
-          \item $20\%$ for inner-most layers
-          \item $5\%$ for outer-most layers
-          \end{itemize}
+          \item Reduces the running time by avoiding to place each wire individually
         \end{itemize}
+    \end{itemize}
 
-	\vspace{-0.1cm}
-	\begin{columns}[t]
-	\column{0.5\textwidth}
-	\centering
-	\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_phi.pdf}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/allHits}
 
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item The coverage of the drift chamber as a function of the polar angle $\theta$ is investigated.
+      \item High coverage in the barrel region by $\sim 112$ wires in average.
+      \item In the forward region, silicon disks are foreseen to improve the track angle coverage.
+    \end{itemize}
 
-	\column{0.5\textwidth}	
-	\centering
-        \begin{tikzpicture}
-          \node[anchor=south west,inner sep=0] (image) at
-          (0,0){\includegraphics[width=0.8\textwidth]{../figures/layerR_vs_wires_percent.pdf}};
-          \begin{scope}[x={(image.south east)},y={(image.north west)}]
+    \vspace{-0.1cm}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/numWires}
 
-            % \draw[help lines,xstep=.1,ystep=.1] (0, 0) grid (1,1);
-            % \foreach \x in {0,1,...,9} { \node [anchor=north] at (\x/10,0) {0.\x}; }
-            % \foreach \y in {0,1,...,9} { \node [anchor=east] at (0,\y/10)
-            % {0.\y}; }
-            % 
-            \node[above] at (0.5, 0.8) {\textcolor{red}{Work in progress}}; 
-            
-          \end{scope}
-        \end{tikzpicture}
-	\end{columns}
+  \end{columns}
 
-        \vspace{-0.2cm}
-	\begin{itemize}
-	\item The readout time of the wires (dead time): 400~ns
-        \item At the Z stage (E\textsubscript{cm}=91.2~GeV, bunch
-          spacing: 20~ns), an occupancy of 2000 wires per BX
-          becomes critical \\
-          $\Rightarrow$ Possible compensation by having $10\times$
-          less background (than E\textsubscript{cm}=365~GeV where the
-          studies have been made)?  \textbf{\textcolor{red}{$\rightarrow$ To be
-            studied!}}
-	\end{itemize}
-	
+  %
+  % \begin{columns}
+  %   \column{0.5\textwidth}
+  %   \begin{itemize}
+  %     \item The coverage of the drift chamber as a function of the polar angle $\theta$ is investigated. \vspace{0.5cm}
+  %     \item High coverage in the barrel region by $\sim 112$ wires in average. \vspace{0.5cm}
+  %     \item In the forward region, silicon disks are foreseen to improve the track angle coverage. \vspace{0.5cm}
+  %   \end{itemize}
+  %
+  %   \column{0.5\textwidth}
+  %     \centering
+  %     \includegraphics[width=\textwidth]{figures/numWires}
+  % \end{columns}
+
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Beam-induced backgrounds at FCC-ee}
+
+  \begin{itemize}
+    \item Three main sources of beam-induced backgrounds at FCC-ee
+    \begin{itemize}
+      \item \textbf{Incoherent $e^+e^-$ pairs} due to bremstrahlung photons $\Rightarrow$ highest source of background
+      \item \textbf{$\gamma\gamma\rightarrow$ hadrons} $\Rightarrow$ Expected to have a very low impact
+      \item \textbf{Synchrotron radiation (SR)} $\Rightarrow$ Dictates the design of the interaction region (IR)
+        \begin{itemize}
+          \item Defines the beampipe radius, the design of the shielding (in Tungesten)
+          \item Mostly stopped by the shielding, few SR photons can hit the detector
+        \end{itemize}
+    \end{itemize}
+  \end{itemize}
+
+  \begin{columns}
+    \column{0.5\textwidth}
+      \begin{itemize}
+        \item The trajectory of the $e^+e^-$ pairs in a 2~T magnetic field (using helix extrapolation).
+
+        \item No direct hits in the drift chamber (with inner radius of 345~mm)
+      \end{itemize}
+
+    \column{0.5\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{./figures/pairs_R_Z}
+
+    \end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{The impact of the incoherent background pairs}
+
+  \begin{columns}
+
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item $e^+e^-$ pairs is the background with the highest Impact
+      \item The occupancy is defined as the percentage of wires hits per layer
+      \item The average bunch spacing
+        \begin{itemize}
+          \item At the Z stage ($\sqrt{s}=$91.2~GeV): 19.6~ns
+          \item At the top stage ($\sqrt{s}=$365~GeV): 3396~ns
+        \end{itemize}
+      \item At the Z stage, the background is integrated over 4 BX to take into account the readout time for the signal.
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Figures/incoherent_top_Z.pdf}
+
+  \end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Conclusions on the beam-induced backgrounds}
+
+  \centering
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{l c c}
+      \toprule
+       Background & \multicolumn{2}{c}{Average occupancy} \\
+        & $\sqrt{s}$ = 91.2~GeV & $\sqrt{s}$ = 365~GeV \\
+       \midrule
+       $e^+e^-$ pair background & 1.1\% & 2.9\% \\
+       $\gamma\gamma\rightarrow$ hadrons & 0.001\% & 0.035\%  \\
+       Synchrotron radiation & negl. & 0.2\% \\
+       \bottomrule
+    \end{tabular}
+  \end{adjustbox}
+
+  \vspace{0.8cm}
+
+  \begin{itemize}
+    \item Based on experience from the MEG2 drift chamber, this is believed to be a manageable level.
+    \item Exploiting the power of the drift chamber timing measurement, the background level can be greatly reduced.
+    \item The track reconstruction in the presence of the beam-induced background needs to be investigated with the current simulation tools.
+  \end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Tracking \& FCCSW}
+
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item ACTS: A Common Tracking Software
+      \item High-level track reconstruction modules to be used for any tracking detector
+      \item Ultimate goal for tracking in FCCSW
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.5\textwidth]{Figures/ACTSlogo.png}
+  \end{columns}
+
+  \begin{itemize}
+    \item Implementations needed for the DCH
+      \begin{itemize}
+        \item The geometry (wires, rotations with the stereo angle)
+        \item In the extrapolation step, a new strategy to manage the high number of wires to limit the computation time (ex. navigation, ...)
+      \end{itemize}
+    \item For FCCSW, the Tricktrack software provides the seeding algorithms (initially implemented for FCC-hh and based on the CMS tracking software)
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Tracking: Hough transform}
+
+  \begin{itemize}
+    \item Before tackling ACTS, a faster solution is to use the Hough transform
+    \item Used for feature extraction in image analysis, computer vision, ...
+      \begin{itemize}
+        \item Identification of lines, ellipses, circles
+      \end{itemize}
+    \item Initially invented for the analysis of bubble chamber photographs
+    \item A possible solution for the drift chamber
+    \begin{itemize}
+      \item Use Tricktrack for seeding in the VXD and limit the search region in the drift chamber.
+      \item Hough Transform for pattern recognition $\Rightarrow$ track reconstruction efficiency
+      \item The track parameters are obtained by using the extrapolation algorithms provided by ACTS or Tricktrack
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Example: detecting a simple line}
+
+  \begin{columns}
+    \column{0.7\textwidth}
+    \begin{itemize}
+      \item Represented as a point (b, m) in the parameter space
+    \end{itemize}
+    \begin{equation}
+      y = m \cdot x + b
+    \end{equation}
+
+    \begin{itemize}
+      \item Hough space: (r, $\theta$)
+    \end{itemize}
+    \begin{equation}
+      r = x \cdot \cos(\theta) + y \cdot \sin(\theta)
+    \end{equation}
+
+    \column{0.3\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/linepic}
+
+  \end{columns}
+
+  \begin{itemize}
+    \item A line corresponds to local maxima in the Hough space.
+  \end{itemize}
+
+  \begin{columns}
+    \column{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/line.pdf}
+
+    \column{0.5\textwidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/line_hough.pdf}
+  \end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         SLIDE             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{A track in a magnetic field}
+
+\begin{columns}
+  \column{0.5\textwidth}
+
+  \begin{itemize}
+    \item Parametrization by a helix
+    \begin{itemize}
+      \item $\phi_0$: initial azimuthal angle
+      \item $d_0$: distance of closest approach
+      \item $r_{T,0}$: the radius of the track
+      \item $\theta_0$: the initial polar angle
+      \item $z_0$: the initial z-coordinate at the point of closest approach
+    \end{itemize}
+    \item Algorithm:
+    \begin{itemize}
+      \item Map a helix trajectory into a straight line (conformal transform)
+      \item Find track parameters in the Hough space
+      \item Computation of the track parameters
+    \end{itemize}
+    \item Reference $\rightarrow$ DOI: \url{10.1051/epjconf/201715000014}
+  \end{itemize}
+
+  \column{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Figures/helix_param_1.png} \\
+    \hspace{0.8cm}
+    \includegraphics[width=0.7\textwidth]{Figures/helix_param_2.png}
+
+  \end{columns}
+
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
@@ -683,66 +598,23 @@ on behalf of FCCee MDI group
 \label{lastslide}
 \begin{frame}
   \frametitle{Summary \& Outlook}
-  
-  	\vspace{1cm}
-	\begin{itemize}
-	\item Full simulation of the FCCee-IDEA detector concept with FCCSW \vspace{0.2cm}
-	\item Implementation of the drift chamber \vspace{0.2cm}
-		$\Rightarrow$ geometry, segmentation, simulation \& reconstuction
-	\item Validations done and still ongoing \vspace{0.2cm}
-	\item First physics studies: \vspace{0.2cm}
-		\begin{itemize}
-		\item Impact of beam-induced backgrounds: $e^{+}e^{-}$ pairs from $\gamma\gamma$ collisions
-	  	\item Estimation of the occupancy in the VXD and DCH with FCCSW and comparison with ILCSoft
-	  	\item Small occupancy due to the incoherent pairs in the VXD
-	  	\item More investigation on the occupancy is needed for the DCH to draw final conclusions \vspace{0.2cm}
-	  	\end{itemize}
-	\item Future work: \vspace{0.2cm}
-		\begin{itemize}
-		\item Implementation of a realistic material around DCH for a realistic estimate of the background
-		\item Study the effect of the synchrotron radiation \& $\gamma\gamma\rightarrow$~hadrons
-		\item Optimisation of the geometry of the DCH
-		\item Track reconstruction in FCCSW
-		\end{itemize}
-  	\end{itemize}
 
-	\vspace{1cm}
+
+  \begin{itemize}
+    \item The IDEA detector well integrated within FCCSW
+    \item The impact of the beam-induced backgrounds on the drift chamber is studied
+      \begin{itemize}
+        \item Estimation of the occupancy
+        \item Reasonable based on past experience with the drift chamber for MEG2
+      \end{itemize}
+    \item Investigation on the tracking $\Rightarrow$ methods to be implemented soon.
+  \end{itemize}
+
+  \vspace{1cm}
 	\centering
 	\Large{\textbf{Thank you for your attention!}}
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{frame}
-%  \frametitle{Number of times the same wire is hit per BX}
-%
-%  \begin{columns}
-%  	\column{0.33\textwidth}	
-%  	\begin{itemize}
-%  	\item BX 0
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX0.pdf}
-%	
-%	\column{0.33\textwidth}
-%	\begin{itemize}
-%  	\item BX 1
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX1.pdf}
-%	
-%	\column{0.33\textwidth}	
-%  	\begin{itemize}
-%  	\item BX 2
-%  	\end{itemize}
-%	\centering
-%	\includegraphics[width=\textwidth]{../figures/DCH/nbWires_BX2.pdf}
-%  \end{columns}
-%
-%\end{frame}
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -755,140 +627,34 @@ on behalf of FCCee MDI group
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %         SLIDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \begin{frame}
-  \frametitle{Segmentation Strategy for DCH}
+	\frametitle{The dimensions of the vertex \& tracking detectors}
 
 
-    \begin{itemize}
-    \item Large number of wires $\Rightarrow$ requires a fast way to find the
-      location of the closest wire hit
-    \item Compute the azimuth angle of the hit $\phi$ for $(x_{hit},
-      y_{hit})$ 
-      \begin{itemize}
-      \item (like if the wires were parallel to the z-axis).
-      \end{itemize}
+  \begin{itemize}
+	\item FCCee\_o1\_v02
+	\end{itemize}
 
-    \begin{equation}
-      \phi = \arctan(y_{hit}/x_{hit})
-    \end{equation}
-
-    \item The angle between the hit position and the wire detecting it
-      is calculated:
-
-    \begin{equation}
-      \alpha = 2 \arcsin({{z_{hit} tan(\epsilon)} \over {2R}})
-    \end{equation}
-  \item Total hit azimuthal angle: $\phi+\alpha$
-    \end{itemize}
-
-
-    \begin{columns}
-      \column{0.33\textwidth}
-      \column{0.33\textwidth}
-      \begin{tikzpicture}[scale=0.5]
-
-        \pgfmathsetmacro{\R}{2}
-        \pgfmathsetmacro{\wireAng}{45}
-        
-        \coordinate (O) at (0,0);
-        \foreach \angle in 
-        {0,45,...,360} 
-        { 
-          \fill (\angle:\R) circle (0.1cm); 
-        } 
-        \draw (0,0) circle (\R);
-
-        \draw 
-        (\R,0) coordinate (xcoord) -- 
-        node[midway,below] {R} (O) -- 
-        (\wireAng:\R) coordinate (slcoord)
-        pic [draw,->,angle radius=1cm,"$\phi$"] {angle = xcoord--O--slcoord};
-
-        \draw[<->,line width=0.5pt,red] (\R, 0) -- (1.4, 1.4) node
-        (deltay) [midway,right] {a};
-
-        \begin{scope}[]
-          \draw[->] (-2.5,0) -- (2.5,0) node[right] {$x$};
-          \draw[->] (0,-2.5) -- (0,2.5) node[above] {$y$};
-        \end{scope}
-      \end{tikzpicture}
-
-      \column{0.33\textwidth}
-    \begin{tikzpicture}[scale=0.5]
-      \begin{scope}
-        \coordinate (origin) at (0,4);
-
-        \draw[->] (-0.5,0.5) -- (5,0.5) node[right] {$z$};
-        \draw[->] (-0.5, 0.5) -- (-0.5,5) node[above] {$\phi$};
-
-        \draw[-,line width=1pt] (0, 1) -- (0, 4);
-        \draw[-,line width=1pt] (4, 1.5) -- (4, 4.5);
-
-        \draw[-,line width=2pt] (0, 1) -- (4, 1.5);
-        \draw[-,line width=2pt] (0, 2) -- (4, 2.5);
-        \draw[-,line width=2pt] (0, 3) -- (4, 3.5);
-        \draw[-,line width=2pt] (0, 4) -- (4, 4.5) node
-        (pivot) [] {};
-        \draw[<->,line width=0.5pt] (0, 4.1) -- (4, 4.6) node
-        (length) [above] {wire length};
-        \draw[<->,line width=0.5pt,red] (4.2, 1.5) -- (4.2, 2.5) node
-        (deltay) [midway, right] {a};
-
-        \draw[-,dashed, line width=0.5pt] (origin) -- (3, 4) node
-        (horizon) [] {};
-        \pic [draw, ->, "$\epsilon$", angle eccentricity=1.2, angle radius=2cm] {angle = horizon--origin--pivot};
-
-
-        \draw[-,dashed, blue] (0, 1.5) -- (4, 2);
-        \draw[-, dashed, blue] (0, 2.5) -- (4, 3);
-        \draw[-, dashed, blue] (0, 3.5) -- (4, 4);
-
-        % \draw[-,blue,line width=1pt] (2, 5) -- (2, 0.7) node
-        % (segz) [right] {z segmentation (w)};
-      \end{scope}
-    \end{tikzpicture}
-    \end{columns}
+	\begin{tabular}{l|l|l}
+	Parameters & FCCee (Si) & FCCee (IDEA) \\ \hline
+	VXD Barrel r\textsubscript{in} & \textcolor{Green}{17 mm} & \textcolor{Green}{17 mm} \\
+	VXD Barrel r\textsubscript{out} & 59 mm & 59 mm \\
+	VXD Barrel length & 250 mm & 250 mm \\
+	VXD Endcap r\textsubscript{in} & 24 - 45 mm & 24 - 45 mm \\
+	VXD Endcap r\textsubscript{out} & 102 mm & 102 mm \\
+	VXD Endcap z\textsubscript{position} & 159-301 mm & 159-301 mm \\
+	Tracker Barrel r\textsubscript{in} & \textcolor{Green}{127 mm} & \textcolor{Green}{345 mm} \\
+	Tracker Barrel r\textsubscript{out} & \textcolor{Green}{2100 mm} & \textcolor{Green}{2000 mm} \\
+	Tracker Barrel length & 2528 mm & 4500 mm \\
+	Tracker Endcap r\textsubscript{in} & 78 mm & N.A. \\
+	Tracker Endcap r\textsubscript{Out} & 2080 mm & N.A. \\
+	Tracker Endcap z\textsubscript{pos} range & 524:2190 mm & N.A. mm \\
+	\end{tabular}
 
 
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Impact of incoherent pairs in the DCH: work in progress}
-
-
-
-	\begin{columns}
-	\column{0.5\textwidth}
-	\centering
-	\includegraphics[width=\textwidth]{../figures/layerR_vs_wires.pdf}
-
-	\column{0.5\textwidth}	
-	\centering
-	\includegraphics[width=\textwidth]{../figures/layerR_vs_wires_percent.pdf}	
-	
-	\end{columns}
-	
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         SLIDE             %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\frametitle{Secondary vertices produced}
-
-
-	\centering
-	\includegraphics[width=0.7\textwidth]{../figures/SecondaryVertices_logScale.pdf}
-
-	
-\end{frame}
-
 
 %----------------------------------------------------------------------------------------
 %	End of Document
 %----------------------------------------------------------------------------------------
-\end{document} 
+\end{document}
